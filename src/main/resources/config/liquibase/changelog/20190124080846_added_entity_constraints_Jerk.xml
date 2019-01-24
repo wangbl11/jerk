@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity Jerk.
+    -->
+    <changeSet id="20190124080846-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="jerk_info_id"
+                                 baseTableName="jerk"
+                                 constraintName="fk_jerk_jerk_info_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="registration"/>
+
+        <addForeignKeyConstraint baseColumnNames="preference_id"
+                                 baseTableName="jerk"
+                                 constraintName="fk_jerk_preference_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="preference"/>
+
+    </changeSet>
+</databaseChangeLog>

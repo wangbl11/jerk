@@ -1,0 +1,29 @@
+{
+  "jerkkApp": {
+    "jerk": {
+      "home": {
+        "title": "Jerks",
+        "createLabel": "创建新 Jerk",
+        "createOrEditLabel": "创建或编辑 Jerk",
+        "search": "查找 Jerk"
+      },
+      "created": "Jerk {{ param }} 创建成功",
+      "updated": "Jerk {{ param }} 更新成功",
+      "deleted": "Jerk {{ param }} 删除成功",
+      "delete": {
+        "question": "你确定要删除 Jerk {{ id }} 吗？"
+      },
+      "detail": {
+        "title": "Jerk"
+      },
+      "username": "Username",
+      "passwd": "Passwd",
+      "displayname": "Displayname",
+      "authStatus": "Auth Status",
+      "createdDate": "Created Date",
+      "modifiedDate": "Modified Date",
+      "jerkInfo": "Jerk Info",
+      "preference": "Preference"
+    }
+  }
+}

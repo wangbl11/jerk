@@ -38,6 +38,11 @@ public class CacheConfiguration {
             cm.createCache(com.kongtiantou.jerk.domain.User.class.getName(), jcacheConfiguration);
             cm.createCache(com.kongtiantou.jerk.domain.Authority.class.getName(), jcacheConfiguration);
             cm.createCache(com.kongtiantou.jerk.domain.User.class.getName() + ".authorities", jcacheConfiguration);
+            cm.createCache(com.kongtiantou.jerk.domain.Jerk.class.getName(), jcacheConfiguration);
+            cm.createCache(com.kongtiantou.jerk.domain.Preference.class.getName(), jcacheConfiguration);
+            cm.createCache(com.kongtiantou.jerk.domain.Registration.class.getName(), jcacheConfiguration);
+            cm.createCache(com.kongtiantou.jerk.domain.Tag.class.getName(), jcacheConfiguration);
+            cm.createCache(com.kongtiantou.jerk.domain.Setting.class.getName(), jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }

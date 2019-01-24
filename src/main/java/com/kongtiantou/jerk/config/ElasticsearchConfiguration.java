@@ -5,6 +5,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.github.vanroy.springdata.jest.JestElasticsearchTemplate;
 import com.github.vanroy.springdata.jest.mapper.DefaultJestResultsMapper;
+import com.kongtiantou.jerk.web.rest.util.HighLightJestSearchResultMapper;
+
 import io.searchbox.client.JestClient;
 import org.springframework.boot.autoconfigure.data.elasticsearch.ElasticsearchProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -45,6 +47,10 @@ public class ElasticsearchConfiguration {
             new DefaultJestResultsMapper(simpleElasticsearchMappingContext, mapper));
     }
 
+    @Bean
+    public HighLightJestSearchResultMapper highLightJestSearchResultMapper(){
+        return new HighLightJestSearchResultMapper();
+    }
     public class CustomEntityMapper implements EntityMapper {
 
         private ObjectMapper objectMapper;

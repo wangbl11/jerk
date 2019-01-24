@@ -1,0 +1,27 @@
+{
+  "jerkkApp": {
+    "setting": {
+      "home": {
+        "title": "Settings",
+        "createLabel": "建立一筆新的 Setting",
+        "createOrEditLabel": "建立或編輯 Setting",
+        "search": "搜尋 Setting"
+      },
+      "created": "新的 Setting 建立成功，識別碼為 {{ param }}",
+      "updated": "識別碼為 {{ param }} 的 Setting 更新成功",
+      "deleted": "識別碼為 {{ param }} 的 Setting 刪除成功",
+      "delete": {
+        "question": "您確定要刪除 Setting {{ id }} 嗎?"
+      },
+      "detail": {
+        "title": "Setting"
+      },
+      "name": "Name",
+      "type": "Type",
+      "value": "Value",
+      "defvalue": "Defvalue",
+      "createdDate": "Created Date",
+      "modifiedDate": "Modified Date"
+    }
+  }
+}

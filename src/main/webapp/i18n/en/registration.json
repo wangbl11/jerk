@@ -1,0 +1,61 @@
+{
+  "jerkkApp": {
+    "registration": {
+      "home": {
+        "title": "Registrations",
+        "createLabel": "Create a new Registration",
+        "createOrEditLabel": "Create or edit a Registration",
+        "search": "Search for Registration"
+      },
+      "created": "A new Registration is created with identifier {{ param }}",
+      "updated": "A Registration is updated with identifier {{ param }}",
+      "deleted": "A Registration is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Registration {{ id }}?"
+      },
+      "detail": {
+        "title": "Registration"
+      },
+      "registType": "Regist Type",
+      "dwqc": "Dwqc",
+      "hxcpmc": "Hxcpmc",
+      "zztjdw": "Zztjdw",
+      "dwhgrdz": "Dwhgrdz",
+      "szqylx": "Szqylx",
+      "ssly": "Ssly",
+      "gscpjj": "Gscpjj",
+      "mbkhsc": "Mbkhsc",
+      "dqzykh": "Dqzykh",
+      "gnwhjjx": "Gnwhjjx",
+      "zljs": "Zljs",
+      "hxjsly": "Hxjsly",
+      "kjcgzh": "Kjcgzh",
+      "jmlyqk": "Jmlyqk",
+      "jscsd": "Jscsd",
+      "jzmsylqk": "Jzmsylqk",
+      "jzysjs": "Jzysjs",
+      "fzrdh": "Fzrdh",
+      "xb": "Xb",
+      "lxfs": "Lxfs",
+      "email": "Email",
+      "fzrnl": "Fzrnl",
+      "tdpjnl": "Tdpjnl",
+      "gjrcs": "Gjrcs",
+      "sfgjrzgxjsqy": "Sfgjrzgxjsqy",
+      "tdysjs": "Tdysjs",
+      "xycz": "Xycz",
+      "wlxwhdzclx": "Wlxwhdzclx",
+      "wlxwhdzclx1": "Wlxwhdzclx 1",
+      "sfxyxc": "Sfxyxc",
+      "rzjhgkfw": "Rzjhgkfw",
+      "rzmb": "Rzmb",
+      "lxrzw": "Lxrzw",
+      "lxdh": "Lxdh",
+      "lxyx": "Lxyx",
+      "lxdz": "Lxdz",
+      "ssly1": "Ssly 1",
+      "createdDate": "Created Date",
+      "modifiedDate": "Modified Date"
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "jerkkApp": {
+    "jerk": {
+      "home": {
+        "title": "Jerks",
+        "createLabel": "Create a new Jerk",
+        "createOrEditLabel": "Create or edit a Jerk",
+        "search": "Search for Jerk"
+      },
+      "created": "A new Jerk is created with identifier {{ param }}",
+      "updated": "A Jerk is updated with identifier {{ param }}",
+      "deleted": "A Jerk is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Jerk {{ id }}?"
+      },
+      "detail": {
+        "title": "Jerk"
+      },
+      "username": "Username",
+      "passwd": "Passwd",
+      "displayname": "Displayname",
+      "authStatus": "Auth Status",
+      "createdDate": "Created Date",
+      "modifiedDate": "Modified Date",
+      "jerkInfo": "Jerk Info",
+      "preference": "Preference"
+    }
+  }
+}

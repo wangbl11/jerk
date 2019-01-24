@@ -36,9 +36,9 @@ spring:
             indent-output: true
     datasource:
         type: com.zaxxer.hikari.HikariDataSource
-        url: jdbc:mysql://localhost:3306/jerkk?useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC
+        url: jdbc:mysql://localhost:3306/jerk?useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC
         username: root
-        password:
+        password: rootpassword
         hikari:
             auto-commit: false
             data-source-properties:
@@ -58,10 +58,12 @@ spring:
             hibernate.generate_statistics: true
             hibernate.cache.region.factory_class: io.github.jhipster.config.jcache.BeanClassLoaderAwareJCacheRegionFactory
     data:
-        elasticsearch:
-            properties:
-                path:
-                    home: target/elasticsearch
+        jest:
+            uri: http://localhost:9200
+        # elasticsearch:
+        #     properties:
+        #         path:
+        #             home: target/elasticsearch
     liquibase:
         contexts: dev
     mail:

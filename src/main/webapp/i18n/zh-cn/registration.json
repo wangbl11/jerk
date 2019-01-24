@@ -1,0 +1,61 @@
+{
+  "jerkkApp": {
+    "registration": {
+      "home": {
+        "title": "Registrations",
+        "createLabel": "创建新 Registration",
+        "createOrEditLabel": "创建或编辑 Registration",
+        "search": "查找 Registration"
+      },
+      "created": "Registration {{ param }} 创建成功",
+      "updated": "Registration {{ param }} 更新成功",
+      "deleted": "Registration {{ param }} 删除成功",
+      "delete": {
+        "question": "你确定要删除 Registration {{ id }} 吗？"
+      },
+      "detail": {
+        "title": "Registration"
+      },
+      "registType": "Regist Type",
+      "dwqc": "Dwqc",
+      "hxcpmc": "Hxcpmc",
+      "zztjdw": "Zztjdw",
+      "dwhgrdz": "Dwhgrdz",
+      "szqylx": "Szqylx",
+      "ssly": "Ssly",
+      "gscpjj": "Gscpjj",
+      "mbkhsc": "Mbkhsc",
+      "dqzykh": "Dqzykh",
+      "gnwhjjx": "Gnwhjjx",
+      "zljs": "Zljs",
+      "hxjsly": "Hxjsly",
+      "kjcgzh": "Kjcgzh",
+      "jmlyqk": "Jmlyqk",
+      "jscsd": "Jscsd",
+      "jzmsylqk": "Jzmsylqk",
+      "jzysjs": "Jzysjs",
+      "fzrdh": "Fzrdh",
+      "xb": "Xb",
+      "lxfs": "Lxfs",
+      "email": "Email",
+      "fzrnl": "Fzrnl",
+      "tdpjnl": "Tdpjnl",
+      "gjrcs": "Gjrcs",
+      "sfgjrzgxjsqy": "Sfgjrzgxjsqy",
+      "tdysjs": "Tdysjs",
+      "xycz": "Xycz",
+      "wlxwhdzclx": "Wlxwhdzclx",
+      "wlxwhdzclx1": "Wlxwhdzclx 1",
+      "sfxyxc": "Sfxyxc",
+      "rzjhgkfw": "Rzjhgkfw",
+      "rzmb": "Rzmb",
+      "lxrzw": "Lxrzw",
+      "lxdh": "Lxdh",
+      "lxyx": "Lxyx",
+      "lxdz": "Lxdz",
+      "ssly1": "Ssly 1",
+      "createdDate": "Created Date",
+      "modifiedDate": "Modified Date"
+    }
+  }
+}

@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <property name="now" value="now()" dbms="h2"/>
+
+    <property name="now" value="now()" dbms="mysql"/>
+    <property name="autoIncrement" value="true"/>
+
+    <property name="floatType" value="float4" dbms="postgresql, h2"/>
+    <property name="floatType" value="float" dbms="mysql, oracle, mssql"/>
+
+    <!--
+        Added the entity Registration.
+    -->
+    <changeSet id="20190124080848-1" author="jhipster">
+        <createTable tableName="registration">
+            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="regist_type" type="integer">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="dwqc" type="varchar(60)">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="hxcpmc" type="varchar(120)">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="zztjdw" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="dwhgrdz" type="varchar(100)">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="szqylx" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="ssly" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="gscpjj" type="varchar(360)">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="mbkhsc" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="dqzykh" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="gnwhjjx" type="varchar(500)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="zljs" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="hxjsly" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="kjcgzh" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="jmlyqk" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="jscsd" type="varchar(120)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="jzmsylqk" type="varchar(500)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="jzysjs" type="varchar(500)">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="fzrdh" type="varchar(20)">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="xb" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="lxfs" type="varchar(36)">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="email" type="varchar(36)">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="fzrnl" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="tdpjnl" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="gjrcs" type="integer">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="sfgjrzgxjsqy" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="tdysjs" type="varchar(500)">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="xycz" type="varchar(24)">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="wlxwhdzclx" type="varchar(36)">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="wlxwhdzclx_1" type="varchar(100)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="sfxyxc" type="varchar(100)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="rzjhgkfw" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="rzmb" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="lxrzw" type="varchar(100)">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="lxdh" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="lxyx" type="varchar(60)">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="lxdz" type="varchar(120)">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="ssly_1" type="varchar(60)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="created_date" type="bigint">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="modified_date" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
+        </createTable>
+        
+    </changeSet>
+    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
+</databaseChangeLog>
