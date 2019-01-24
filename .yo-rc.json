@@ -1,0 +1,36 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "com.kongtiantou.jerk",
+      "nativeLanguage": "en"
+    },
+    "jhipsterVersion": "5.7.2",
+    "applicationType": "monolith",
+    "baseName": "jerkk",
+    "packageName": "com.kongtiantou.jerk",
+    "packageFolder": "com/kongtiantou/jerk",
+    "serverPort": "8080",
+    "authenticationType": "jwt",
+    "cacheProvider": "ehcache",
+    "enableHibernateCache": true,
+    "websocket": "spring-websocket",
+    "databaseType": "sql",
+    "devDatabaseType": "mysql",
+    "prodDatabaseType": "mysql",
+    "searchEngine": "elasticsearch",
+    "messageBroker": false,
+    "serviceDiscoveryType": false,
+    "buildTool": "maven",
+    "enableSwaggerCodegen": false,
+    "jwtSecretKey": "NjEyZGRlYzdjYTI5MTFmMTVhMGY3M2NjNTIyMTY1MjcwMzA3YzY0NjY0N2ZjZTgwYWYzYzA2Yjk5ZDk2YTNlNDFjY2UxMmVmNjE1YWRmMWFlYTRlOWJhZDk2NzljMmY1YTEwNDUxNDU1YWMwMjUxNTNmNTJmNjJjM2YxZDA3ZTk=",
+    "clientFramework": "react",
+    "useSass": false,
+    "clientPackageManager": "npm",
+    "testFrameworks": [],
+    "jhiPrefix": "jhi",
+    "otherModules": [],
+    "enableTranslation": true,
+    "nativeLanguage": "en",
+    "languages": ["en", "zh-cn", "zh-tw"]
+  }
+}
