@@ -7,6 +7,7 @@ import { AvForm, AvGroup, AvInput } from 'availity-reactstrap-validation';
 import {
   Translate,
   translate,
+  TextFormat,
   ICrudSearchAction,
   ICrudGetAllAction,
   getSortState,
@@ -165,8 +166,12 @@ export class Jerk extends React.Component<IJerkProps, IJerkState> {
                   <td>
                     <Translate contentKey={`jerkkApp.AuthStatusEnum.${jerk.authStatus}`} />
                   </td>
-                  <td>{jerk.createdDate}</td>
-                  <td>{jerk.modifiedDate}</td>
+                  <td>
+                    <TextFormat value={jerk.createdDate} type="date" format={APP_DATE_FORMAT} blankOnInvalid />
+                  </td>
+                  <td>
+                    <TextFormat value={jerk.modifiedDate} type="date" format={APP_DATE_FORMAT} blankOnInvalid />
+                  </td>
                   <td>{jerk.jerkInfo ? <Link to={`registration/${jerk.jerkInfo.id}`}>{jerk.jerkInfo.id}</Link> : ''}</td>
                   <td>{jerk.preference ? <Link to={`preference/${jerk.preference.id}`}>{jerk.preference.id}</Link> : ''}</td>
                   <td className="text-right">

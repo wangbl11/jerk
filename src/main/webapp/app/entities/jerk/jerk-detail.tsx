@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import { Button, Row, Col } from 'reactstrap';
 // tslint:disable-next-line:no-unused-variable
-import { Translate, ICrudGetAction } from 'react-jhipster';
+import { Translate, TextFormat, ICrudGetAction } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { IRootState } from 'app/shared/reducers';
@@ -57,13 +57,17 @@ export class JerkDetail extends React.Component<IJerkDetailProps> {
                 <Translate contentKey="jerkkApp.jerk.createdDate">Created Date</Translate>
               </span>
             </dt>
-            <dd>{jerkEntity.createdDate}</dd>
+            <dd>
+              <TextFormat value={jerkEntity.createdDate} type="date" format={APP_DATE_FORMAT} blankOnInvalid />
+            </dd>
             <dt>
               <span id="modifiedDate">
                 <Translate contentKey="jerkkApp.jerk.modifiedDate">Modified Date</Translate>
               </span>
             </dt>
-            <dd>{jerkEntity.modifiedDate}</dd>
+            <dd>
+              <TextFormat value={jerkEntity.modifiedDate} type="date" format={APP_DATE_FORMAT} blankOnInvalid />
+            </dd>
             <dt>
               <Translate contentKey="jerkkApp.jerk.jerkInfo">Jerk Info</Translate>
             </dt>

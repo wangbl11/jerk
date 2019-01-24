@@ -42,8 +42,7 @@ public class Tag extends HighLightEntity {
     @Column(name = "weight", nullable = false)
     private Integer weight;
 
-    @NotNull
-    @Column(name = "created_date", nullable = false)
+    @Column(name = "created_date")
     private Long createdDate;
 
     @Column(name = "modified_date")

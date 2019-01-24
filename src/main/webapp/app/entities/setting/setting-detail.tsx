@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import { Button, Row, Col } from 'reactstrap';
 // tslint:disable-next-line:no-unused-variable
-import { Translate, ICrudGetAction } from 'react-jhipster';
+import { Translate, TextFormat, ICrudGetAction } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { IRootState } from 'app/shared/reducers';
@@ -57,13 +57,17 @@ export class SettingDetail extends React.Component<ISettingDetailProps> {
                 <Translate contentKey="jerkkApp.setting.createdDate">Created Date</Translate>
               </span>
             </dt>
-            <dd>{settingEntity.createdDate}</dd>
+            <dd>
+              <TextFormat value={settingEntity.createdDate} type="date" format={APP_DATE_FORMAT} blankOnInvalid />
+            </dd>
             <dt>
               <span id="modifiedDate">
                 <Translate contentKey="jerkkApp.setting.modifiedDate">Modified Date</Translate>
               </span>
             </dt>
-            <dd>{settingEntity.modifiedDate}</dd>
+            <dd>
+              <TextFormat value={settingEntity.createdDate} type="date" format={APP_DATE_FORMAT} blankOnInvalid />
+            </dd>
           </dl>
           <Button tag={Link} to="/entity/setting" replace color="info">
             <FontAwesomeIcon icon="arrow-left" />{' '}

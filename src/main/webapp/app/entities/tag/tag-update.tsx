@@ -148,27 +148,6 @@ export class TagUpdate extends React.Component<ITagUpdateProps, ITagUpdateState>
                     }}
                   />
                 </AvGroup>
-                <AvGroup>
-                  <Label id="createdDateLabel" for="createdDate">
-                    <Translate contentKey="jerkkApp.tag.createdDate">Created Date</Translate>
-                  </Label>
-                  <AvField
-                    id="tag-createdDate"
-                    type="string"
-                    className="form-control"
-                    name="createdDate"
-                    validate={{
-                      required: { value: true, errorMessage: translate('entity.validation.required') },
-                      number: { value: true, errorMessage: translate('entity.validation.number') }
-                    }}
-                  />
-                </AvGroup>
-                <AvGroup>
-                  <Label id="modifiedDateLabel" for="modifiedDate">
-                    <Translate contentKey="jerkkApp.tag.modifiedDate">Modified Date</Translate>
-                  </Label>
-                  <AvField id="tag-modifiedDate" type="string" className="form-control" name="modifiedDate" />
-                </AvGroup>
                 <Button tag={Link} id="cancel-save" to="/entity/tag" replace color="info">
                   <FontAwesomeIcon icon="arrow-left" />
                   &nbsp;

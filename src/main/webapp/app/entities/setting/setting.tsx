@@ -7,6 +7,7 @@ import { AvForm, AvGroup, AvInput } from 'availity-reactstrap-validation';
 import {
   Translate,
   translate,
+  TextFormat,
   ICrudSearchAction,
   ICrudGetAllAction,
   getSortState,
@@ -159,8 +160,12 @@ export class Setting extends React.Component<ISettingProps, ISettingState> {
                   </td>
                   <td>{setting.value}</td>
                   <td>{setting.defvalue}</td>
-                  <td>{setting.createdDate}</td>
-                  <td>{setting.modifiedDate}</td>
+                  <td>
+                    <TextFormat value={setting.createdDate} type="date" format={APP_DATE_FORMAT} blankOnInvalid />
+                  </td>
+                  <td>
+                    <TextFormat value={setting.modifiedDate} type="date" format={APP_DATE_FORMAT} blankOnInvalid />
+                  </td>
                   <td className="text-right">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`${match.url}/${setting.id}`} color="info" size="sm">

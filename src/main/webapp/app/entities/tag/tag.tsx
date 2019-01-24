@@ -7,6 +7,7 @@ import { AvForm, AvGroup, AvInput } from 'availity-reactstrap-validation';
 import {
   Translate,
   translate,
+  TextFormat,
   ICrudSearchAction,
   ICrudGetAllAction,
   getSortState,
@@ -157,8 +158,12 @@ export class Tag extends React.Component<ITagProps, ITagState> {
                   <td>{tag.type}</td>
                   <td>{tag.status}</td>
                   <td>{tag.weight}</td>
-                  <td>{tag.createdDate}</td>
-                  <td>{tag.modifiedDate}</td>
+                  <td>
+                    <TextFormat value={tag.createdDate} type="date" format={APP_DATE_FORMAT} blankOnInvalid />
+                  </td>
+                  <td>
+                    <TextFormat value={tag.modifiedDate} type="date" format={APP_DATE_FORMAT} blankOnInvalid />
+                  </td>
                   <td className="text-right">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`${match.url}/${tag.id}`} color="info" size="sm">

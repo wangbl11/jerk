@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import { Button, Row, Col } from 'reactstrap';
 // tslint:disable-next-line:no-unused-variable
-import { Translate, ICrudGetAction } from 'react-jhipster';
+import { Translate, TextFormat, ICrudGetAction } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { IRootState } from 'app/shared/reducers';
@@ -57,13 +57,17 @@ export class TagDetail extends React.Component<ITagDetailProps> {
                 <Translate contentKey="jerkkApp.tag.createdDate">Created Date</Translate>
               </span>
             </dt>
-            <dd>{tagEntity.createdDate}</dd>
+            <dd>
+              <TextFormat value={tagEntity.createdDate} type="date" format={APP_DATE_FORMAT} blankOnInvalid />
+            </dd>
             <dt>
               <span id="modifiedDate">
                 <Translate contentKey="jerkkApp.tag.modifiedDate">Modified Date</Translate>
               </span>
             </dt>
-            <dd>{tagEntity.modifiedDate}</dd>
+            <dd>
+              <TextFormat value={tagEntity.modifiedDate} type="date" format={APP_DATE_FORMAT} blankOnInvalid />
+            </dd>
           </dl>
           <Button tag={Link} to="/entity/tag" replace color="info">
             <FontAwesomeIcon icon="arrow-left" />{' '}

@@ -153,27 +153,6 @@ export class SettingUpdate extends React.Component<ISettingUpdateProps, ISetting
                     }}
                   />
                 </AvGroup>
-                <AvGroup>
-                  <Label id="createdDateLabel" for="createdDate">
-                    <Translate contentKey="jerkkApp.setting.createdDate">Created Date</Translate>
-                  </Label>
-                  <AvField
-                    id="setting-createdDate"
-                    type="string"
-                    className="form-control"
-                    name="createdDate"
-                    validate={{
-                      required: { value: true, errorMessage: translate('entity.validation.required') },
-                      number: { value: true, errorMessage: translate('entity.validation.number') }
-                    }}
-                  />
-                </AvGroup>
-                <AvGroup>
-                  <Label id="modifiedDateLabel" for="modifiedDate">
-                    <Translate contentKey="jerkkApp.setting.modifiedDate">Modified Date</Translate>
-                  </Label>
-                  <AvField id="setting-modifiedDate" type="string" className="form-control" name="modifiedDate" />
-                </AvGroup>
                 <Button tag={Link} id="cancel-save" to="/entity/setting" replace color="info">
                   <FontAwesomeIcon icon="arrow-left" />
                   &nbsp;

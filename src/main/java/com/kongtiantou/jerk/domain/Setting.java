@@ -47,8 +47,7 @@ public class Setting extends HighLightEntity {
     @Column(name = "defvalue", length = 200, nullable = false)
     private String defvalue;
 
-    @NotNull
-    @Column(name = "created_date", nullable = false)
+    @Column(name = "created_date")
     private Long createdDate;
 
     @Column(name = "modified_date")
