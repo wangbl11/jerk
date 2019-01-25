@@ -154,7 +154,7 @@ export class Setting extends React.Component<ISettingProps, ISettingState> {
                       {setting.id}
                     </Button>
                   </td>
-                  <td>{setting.name}</td>
+                  <td dangerouslySetInnerHTML={{ __html: setting.name }} />
                   <td>
                     <Translate contentKey={`jerkkApp.SettingTypeEnum.${setting.type}`} />
                   </td>

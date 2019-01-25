@@ -1,5 +1,6 @@
 package com.kongtiantou.jerk.web.rest;
 
+import com.github.vanroy.springdata.jest.JestElasticsearchTemplate;
 import com.kongtiantou.jerk.JerkkApp;
 
 import com.kongtiantou.jerk.domain.Setting;
@@ -77,6 +78,9 @@ public class SettingResourceIntTest {
     private SettingSearchRepository mockSettingSearchRepository;
 
     @Autowired
+    private JestElasticsearchTemplate mockElasticsearchTemplate;
+   
+    @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Autowired
@@ -98,7 +102,7 @@ public class SettingResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final SettingResource settingResource = new SettingResource(settingRepository, mockSettingSearchRepository);
+        final SettingResource settingResource = new SettingResource(settingRepository, mockSettingSearchRepository, mockElasticsearchTemplate);
         this.restSettingMockMvc = MockMvcBuilders.standaloneSetup(settingResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)

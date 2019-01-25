@@ -79,7 +79,6 @@ public class TagResourceIntTest {
     @Autowired
     private JestElasticsearchTemplate mockElasticsearchTemplate;
     
-
     @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
