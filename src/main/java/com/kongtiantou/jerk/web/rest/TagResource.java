@@ -6,6 +6,7 @@ import com.kongtiantou.jerk.domain.Tag;
 import com.kongtiantou.jerk.repository.TagRepository;
 import com.kongtiantou.jerk.repository.search.TagSearchRepository;
 import com.kongtiantou.jerk.web.rest.errors.BadRequestAlertException;
+import com.kongtiantou.jerk.web.rest.util.ExtJestSearchResultMapper;
 import com.kongtiantou.jerk.web.rest.util.HeaderUtil;
 import com.kongtiantou.jerk.web.rest.util.HighLightJestSearchResultMapper;
 import com.kongtiantou.jerk.web.rest.util.PaginationUtil;
@@ -56,7 +57,7 @@ public class TagResource {
     private final JestElasticsearchTemplate elasticsearchTemplate;
     
     @Resource
-    private HighLightJestSearchResultMapper highLightJestSearchResultMapper;
+    private ExtJestSearchResultMapper extJestSearchResultMapper;
 
     public TagResource(TagRepository tagRepository, TagSearchRepository tagSearchRepository,JestElasticsearchTemplate elasticsearchTemplate) {
         this.tagRepository = tagRepository;
@@ -78,6 +79,7 @@ public class TagResource {
         if (tag.getId() != null) {
             throw new BadRequestAlertException("A new tag cannot already have an ID", ENTITY_NAME, "idexists");
         }
+        tag.setCreatedDate(System.currentTimeMillis());
         Tag result = tagRepository.save(tag);
         tagSearchRepository.save(result);
         return ResponseEntity.created(new URI("/api/tags/" + result.getId()))
@@ -101,6 +103,7 @@ public class TagResource {
         if (tag.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
+        tag.setModifiedDate(System.currentTimeMillis());
         Tag result = tagRepository.save(tag);
         tagSearchRepository.save(result);
         return ResponseEntity.ok()
@@ -174,7 +177,7 @@ public class TagResource {
                 .withQuery(_query)
                 .withHighlightFields(highlightField).build();
         searchQuery.setPageable(pageable);        
-        Page<Tag> page = elasticsearchTemplate.queryForPage(searchQuery, Tag.class, highLightJestSearchResultMapper);
+        Page<Tag> page = elasticsearchTemplate.queryForPage(searchQuery, Tag.class, extJestSearchResultMapper);
         HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/_search/tags");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }

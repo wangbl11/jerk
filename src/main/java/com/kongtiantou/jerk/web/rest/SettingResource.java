@@ -62,6 +62,7 @@ public class SettingResource {
         if (setting.getId() != null) {
             throw new BadRequestAlertException("A new setting cannot already have an ID", ENTITY_NAME, "idexists");
         }
+        setting.setCreatedDate(System.currentTimeMillis());
         Setting result = settingRepository.save(setting);
         settingSearchRepository.save(result);
         return ResponseEntity.created(new URI("/api/settings/" + result.getId()))
@@ -85,6 +86,7 @@ public class SettingResource {
         if (setting.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
+        setting.setModifiedDate(System.currentTimeMillis());
         Setting result = settingRepository.save(setting);
         settingSearchRepository.save(result);
         return ResponseEntity.ok()

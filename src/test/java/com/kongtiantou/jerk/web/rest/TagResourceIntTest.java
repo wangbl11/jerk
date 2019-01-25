@@ -1,5 +1,6 @@
 package com.kongtiantou.jerk.web.rest;
 
+import com.github.vanroy.springdata.jest.JestElasticsearchTemplate;
 import com.kongtiantou.jerk.JerkkApp;
 
 import com.kongtiantou.jerk.domain.Tag;
@@ -76,6 +77,10 @@ public class TagResourceIntTest {
     private TagSearchRepository mockTagSearchRepository;
 
     @Autowired
+    private JestElasticsearchTemplate mockElasticsearchTemplate;
+    
+
+    @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Autowired
@@ -97,7 +102,7 @@ public class TagResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final TagResource tagResource = new TagResource(tagRepository, mockTagSearchRepository);
+        final TagResource tagResource = new TagResource(tagRepository, mockTagSearchRepository,mockElasticsearchTemplate);
         this.restTagMockMvc = MockMvcBuilders.standaloneSetup(tagResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)

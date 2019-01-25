@@ -154,7 +154,7 @@ export class Tag extends React.Component<ITagProps, ITagState> {
                       {tag.id}
                     </Button>
                   </td>
-                  <td>{tag.name}</td>
+                  <td dangerouslySetInnerHTML={{ __html: tag.name }} />
                   <td>{tag.type}</td>
                   <td>{tag.status}</td>
                   <td>{tag.weight}</td>
