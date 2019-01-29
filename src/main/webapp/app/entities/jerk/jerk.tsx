@@ -128,9 +128,6 @@ export class Jerk extends React.Component<IJerkProps, IJerkState> {
                 <th className="hand" onClick={this.sort('username')}>
                   <Translate contentKey="jerkkApp.jerk.username">Username</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
-                <th className="hand" onClick={this.sort('passwd')}>
-                  <Translate contentKey="jerkkApp.jerk.passwd">Passwd</Translate> <FontAwesomeIcon icon="sort" />
-                </th>
                 <th className="hand" onClick={this.sort('displayname')}>
                   <Translate contentKey="jerkkApp.jerk.displayname">Displayname</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
@@ -161,8 +158,8 @@ export class Jerk extends React.Component<IJerkProps, IJerkState> {
                     </Button>
                   </td>
                   <td>{jerk.username}</td>
-                  <td>{jerk.passwd}</td>
-                  <td>{jerk.displayname}</td>
+
+                  <td dangerouslySetInnerHTML={{ __html: jerk.displayname }} />
                   <td>
                     <Translate contentKey={`jerkkApp.AuthStatusEnum.${jerk.authStatus}`} />
                   </td>

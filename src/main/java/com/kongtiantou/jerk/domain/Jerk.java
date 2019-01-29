@@ -19,7 +19,7 @@ import com.kongtiantou.jerk.domain.enumeration.AuthStatusEnum;
 @Table(name = "jerk")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Document(indexName = "jerk")
-public class Jerk implements Serializable {
+public class Jerk extends HighLightEntity {
 
     private static final long serialVersionUID = 1L;
 

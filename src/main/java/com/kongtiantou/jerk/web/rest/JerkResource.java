@@ -1,10 +1,12 @@
 package com.kongtiantou.jerk.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.github.vanroy.springdata.jest.JestElasticsearchTemplate;
 import com.kongtiantou.jerk.domain.Jerk;
 import com.kongtiantou.jerk.repository.JerkRepository;
 import com.kongtiantou.jerk.repository.search.JerkSearchRepository;
 import com.kongtiantou.jerk.web.rest.errors.BadRequestAlertException;
+import com.kongtiantou.jerk.web.rest.util.ExtJestSearchResultMapper;
 import com.kongtiantou.jerk.web.rest.util.HeaderUtil;
 import com.kongtiantou.jerk.web.rest.util.PaginationUtil;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -17,15 +19,20 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
-
+import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
+import org.springframework.data.elasticsearch.core.query.SearchQuery;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
-
+import org.elasticsearch.index.query.Operator;
+import org.elasticsearch.index.query.QueryBuilder;
+import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
 import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
@@ -43,9 +50,15 @@ public class JerkResource {
 
     private final JerkSearchRepository jerkSearchRepository;
 
-    public JerkResource(JerkRepository jerkRepository, JerkSearchRepository jerkSearchRepository) {
+    private final JestElasticsearchTemplate elasticsearchTemplate;
+    
+    @Resource
+    private ExtJestSearchResultMapper extJestSearchResultMapper;
+
+    public JerkResource(JerkRepository jerkRepository, JerkSearchRepository jerkSearchRepository,JestElasticsearchTemplate elasticsearchTemplate) {
         this.jerkRepository = jerkRepository;
         this.jerkSearchRepository = jerkSearchRepository;
+        this.elasticsearchTemplate = elasticsearchTemplate;
     }
 
     /**
@@ -149,7 +162,21 @@ public class JerkResource {
     @Timed
     public ResponseEntity<List<Jerk>> searchJerks(@RequestParam String query, Pageable pageable) {
         log.debug("REST request to search for a page of Jerks for query {}", query);
-        Page<Jerk> page = jerkSearchRepository.search(queryStringQuery(query), pageable);
+        // Page<Jerk> page = jerkSearchRepository.search(queryStringQuery(query), pageable);
+        QueryBuilder _query=QueryBuilders.multiMatchQuery(query, "displayname","username");
+        
+        QueryBuilder _query1=QueryBuilders.boolQuery().should(QueryBuilders.queryStringQuery(query).field("displayname").field("username"));
+        
+        QueryBuilder _query2=QueryBuilders.queryStringQuery(query).field("displayname").field("username");
+        
+        SearchQuery searchQuery = new NativeSearchQueryBuilder()
+                .withQuery(_query2)
+                .withHighlightFields(new HighlightBuilder.Field("displayname").preTags("<span style='background-color:yellow'>").postTags("</span>"),
+                        new HighlightBuilder.Field("username").preTags("<span style='background-color:yellow'>").postTags("</span>")).build();    
+        searchQuery.setPageable(pageable);     
+        
+        Page<Jerk> page = elasticsearchTemplate.queryForPage(searchQuery, Jerk.class, extJestSearchResultMapper);
+
         HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/_search/jerks");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }

@@ -8,7 +8,6 @@ import com.kongtiantou.jerk.repository.search.TagSearchRepository;
 import com.kongtiantou.jerk.web.rest.errors.BadRequestAlertException;
 import com.kongtiantou.jerk.web.rest.util.ExtJestSearchResultMapper;
 import com.kongtiantou.jerk.web.rest.util.HeaderUtil;
-import com.kongtiantou.jerk.web.rest.util.HighLightJestSearchResultMapper;
 import com.kongtiantou.jerk.web.rest.util.PaginationUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 
