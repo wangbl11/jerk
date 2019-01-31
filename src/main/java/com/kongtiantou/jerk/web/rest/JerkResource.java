@@ -75,6 +75,7 @@ public class JerkResource {
         if (jerk.getId() != null) {
             throw new BadRequestAlertException("A new jerk cannot already have an ID", ENTITY_NAME, "idexists");
         }
+        jerk.setCreatedDate(System.currentTimeMillis());
         Jerk result = jerkRepository.save(jerk);
         jerkSearchRepository.save(result);
         return ResponseEntity.created(new URI("/api/jerks/" + result.getId()))
@@ -98,6 +99,10 @@ public class JerkResource {
         if (jerk.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
+        if (jerk.getJerkInfo()!=null&&jerk.getJerkInfo().getId()==null){
+            jerk.getJerkInfo().setCreatedDate(System.currentTimeMillis());
+        }
+        jerk.setModifiedDate(System.currentTimeMillis());
         Jerk result = jerkRepository.save(jerk);
         jerkSearchRepository.save(result);
         return ResponseEntity.ok()

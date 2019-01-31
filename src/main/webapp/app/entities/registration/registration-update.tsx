@@ -7,12 +7,13 @@ import { AvForm, AvGroup, AvInput, AvField } from 'availity-reactstrap-validatio
 import { Translate, translate, ICrudGetAction, ICrudGetAllAction, ICrudPutAction } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IRootState } from 'app/shared/reducers';
-
-import { getEntity, updateEntity, createEntity, reset } from './registration.reducer';
+import { getEntity, getJerkEntity, updateJerkEntity, updateEntity, createEntity, reset } from './registration.reducer';
+import { IJerk } from 'app/shared/model/jerk.model';
 import { IRegistration } from 'app/shared/model/registration.model';
 // tslint:disable-next-line:no-unused-variable
 import { convertDateTimeFromServer } from 'app/shared/util/date-utils';
 import { mapIdList } from 'app/shared/util/entity-utils';
+import { cleanEntity } from 'app/shared/util/entity-utils';
 
 export interface IRegistrationUpdateProps extends StateProps, DispatchProps, RouteComponentProps<{ id: string }> {}
 
@@ -23,6 +24,7 @@ export interface IRegistrationUpdateState {
 export class RegistrationUpdate extends React.Component<IRegistrationUpdateProps, IRegistrationUpdateState> {
   constructor(props) {
     super(props);
+
     this.state = {
       isNew: !this.props.match.params || !this.props.match.params.id
     };
@@ -37,6 +39,7 @@ export class RegistrationUpdate extends React.Component<IRegistrationUpdateProps
   componentDidMount() {
     if (this.state.isNew) {
       this.props.reset();
+      this.props.getJerkEntity(this.props.match.params['jerkId']);
     } else {
       this.props.getEntity(this.props.match.params.id);
     }
@@ -44,14 +47,17 @@ export class RegistrationUpdate extends React.Component<IRegistrationUpdateProps
 
   saveEntity = (event, errors, values) => {
     if (errors.length === 0) {
-      const { registrationEntity } = this.props;
+      const { jerkEntity, registrationEntity } = this.props;
       const entity = {
         ...registrationEntity,
         ...values
       };
 
+      let _registion = cleanEntity(entity);
+      let _entity = { ...jerkEntity, ...{ jerkInfo: _registion } };
       if (this.state.isNew) {
-        this.props.createEntity(entity);
+        console.log(_entity);
+        this.props.updateJerkEntity(_entity);
       } else {
         this.props.updateEntity(entity);
       }
@@ -63,7 +69,7 @@ export class RegistrationUpdate extends React.Component<IRegistrationUpdateProps
   };
 
   render() {
-    const { registrationEntity, loading, updating } = this.props;
+    const { registrationEntity, jerkEntity, loading, updating } = this.props;
     const { isNew } = this.state;
 
     return (
@@ -716,27 +722,6 @@ export class RegistrationUpdate extends React.Component<IRegistrationUpdateProps
                     }}
                   />
                 </AvGroup>
-                <AvGroup>
-                  <Label id="createdDateLabel" for="createdDate">
-                    <Translate contentKey="jerkkApp.registration.createdDate">Created Date</Translate>
-                  </Label>
-                  <AvField
-                    id="registration-createdDate"
-                    type="string"
-                    className="form-control"
-                    name="createdDate"
-                    validate={{
-                      required: { value: true, errorMessage: translate('entity.validation.required') },
-                      number: { value: true, errorMessage: translate('entity.validation.number') }
-                    }}
-                  />
-                </AvGroup>
-                <AvGroup>
-                  <Label id="modifiedDateLabel" for="modifiedDate">
-                    <Translate contentKey="jerkkApp.registration.modifiedDate">Modified Date</Translate>
-                  </Label>
-                  <AvField id="registration-modifiedDate" type="string" className="form-control" name="modifiedDate" />
-                </AvGroup>
                 <Button tag={Link} id="cancel-save" to="/entity/registration" replace color="info">
                   <FontAwesomeIcon icon="arrow-left" />
                   &nbsp;
@@ -761,12 +746,15 @@ export class RegistrationUpdate extends React.Component<IRegistrationUpdateProps
 
 const mapStateToProps = (storeState: IRootState) => ({
   registrationEntity: storeState.registration.entity,
+  jerkEntity: storeState.registration.jerk,
   loading: storeState.registration.loading,
   updating: storeState.registration.updating,
   updateSuccess: storeState.registration.updateSuccess
 });
 
 const mapDispatchToProps = {
+  getJerkEntity,
+  updateJerkEntity,
   getEntity,
   updateEntity,
   createEntity,

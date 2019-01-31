@@ -18,7 +18,7 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { IRootState } from 'app/shared/reducers';
-import { getSearchEntities, getEntities } from './jerk.reducer';
+import { getSearchEntities, getEntities, updateEntity } from './jerk.reducer';
 import { IJerk } from 'app/shared/model/jerk.model';
 // tslint:disable-next-line:no-unused-variable
 import { APP_DATE_FORMAT, APP_LOCAL_DATE_FORMAT } from 'app/config/constants';
@@ -66,7 +66,10 @@ export class Jerk extends React.Component<IJerkProps, IJerkState> {
       () => this.sortEntities()
     );
   };
-
+  setActive(jerk, sts) {
+    jerk.authStatus = sts ? 'A1' : 'A0';
+    this.props.updateEntity(jerk);
+  }
   sortEntities() {
     this.getEntities();
     this.props.history.push(`${this.props.location.pathname}?page=${this.state.activePage}&sort=${this.state.sort},${this.state.order}`);
@@ -143,9 +146,7 @@ export class Jerk extends React.Component<IJerkProps, IJerkState> {
                 <th>
                   <Translate contentKey="jerkkApp.jerk.jerkInfo">Jerk Info</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
-                <th>
-                  <Translate contentKey="jerkkApp.jerk.preference">Preference</Translate> <FontAwesomeIcon icon="sort" />
-                </th>
+
                 <th />
               </tr>
             </thead>
@@ -161,7 +162,15 @@ export class Jerk extends React.Component<IJerkProps, IJerkState> {
 
                   <td dangerouslySetInnerHTML={{ __html: jerk.displayname }} />
                   <td>
-                    <Translate contentKey={`jerkkApp.AuthStatusEnum.${jerk.authStatus}`} />
+                    {jerk.authStatus == 'A0' ? (
+                      <button onClick={() => this.setActive(jerk, true)} className="btn btn-danger btn-sm">
+                        non-certificated
+                      </button>
+                    ) : (
+                      <button onClick={() => this.setActive(jerk, false)} className="btn btn-danger btn-sm">
+                        certificated
+                      </button>
+                    )}
                   </td>
                   <td>
                     <TextFormat value={jerk.createdDate} type="date" format={APP_DATE_FORMAT} blankOnInvalid />
@@ -169,8 +178,23 @@ export class Jerk extends React.Component<IJerkProps, IJerkState> {
                   <td>
                     <TextFormat value={jerk.modifiedDate} type="date" format={APP_DATE_FORMAT} blankOnInvalid />
                   </td>
-                  <td>{jerk.jerkInfo ? <Link to={`registration/${jerk.jerkInfo.id}`}>{jerk.jerkInfo.id}</Link> : ''}</td>
-                  <td>{jerk.preference ? <Link to={`preference/${jerk.preference.id}`}>{jerk.preference.id}</Link> : ''}</td>
+                  <td>
+                    {jerk.jerkInfo ? (
+                      jerk.jerkInfo.fbzt == 1 ? (
+                        <Link to={`registration/${jerk.jerkInfo.id}`} className="btn btn-primary">
+                          <Translate contentKey="jerkkApp.jerk.online">Published</Translate>
+                        </Link>
+                      ) : (
+                        <Link to={`registration/${jerk.jerkInfo.id}`} className="btn btn-primary">
+                          <Translate contentKey="jerkkApp.jerk.offline">Draft</Translate>
+                        </Link>
+                      )
+                    ) : (
+                      <Link to={`/entity/registration/${jerk.id}/new`} className="btn btn-primary">
+                        <Translate contentKey="jerkkApp.jerk.nonregistration">No Registration</Translate>
+                      </Link>
+                    )}
+                  </td>
                   <td className="text-right">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`${match.url}/${jerk.id}`} color="info" size="sm">
@@ -218,7 +242,8 @@ const mapStateToProps = ({ jerk }: IRootState) => ({
 
 const mapDispatchToProps = {
   getSearchEntities,
-  getEntities
+  getEntities,
+  updateEntity
 };
 
 type StateProps = ReturnType<typeof mapStateToProps>;

@@ -11,7 +11,7 @@ import RegistrationDeleteDialog from './registration-delete-dialog';
 const Routes = ({ match }) => (
   <>
     <Switch>
-      <ErrorBoundaryRoute exact path={`${match.url}/new`} component={RegistrationUpdate} />
+      <ErrorBoundaryRoute exact path={`${match.url}/:jerkId/new`} component={RegistrationUpdate} />
       <ErrorBoundaryRoute exact path={`${match.url}/:id/edit`} component={RegistrationUpdate} />
       <ErrorBoundaryRoute exact path={`${match.url}/:id`} component={RegistrationDetail} />
       <ErrorBoundaryRoute path={match.url} component={Registration} />

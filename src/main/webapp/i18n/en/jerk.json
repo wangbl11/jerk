@@ -23,7 +23,10 @@
       "createdDate": "Created Date",
       "modifiedDate": "Modified Date",
       "jerkInfo": "Jerk Info",
-      "preference": "Preference"
+      "preference": "Preference",
+      "nonregistration": "No Registration",
+      "online": "online",
+      "offline": "offline"
     }
   }
 }

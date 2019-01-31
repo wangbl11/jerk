@@ -7,6 +7,9 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 
 import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldType;
+
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -54,7 +57,9 @@ public class Jerk extends HighLightEntity {
     @Column(name = "modified_date")
     private Long modifiedDate;
 
-    @OneToOne    @JoinColumn(unique = true)
+    @OneToOne(fetch = FetchType.EAGER,cascade =  CascadeType.ALL)
+    @JoinColumn(unique = true)
+    @Field(type = FieldType.Nested)
     private Registration jerkInfo;
 
     @OneToOne    @JoinColumn(unique = true)

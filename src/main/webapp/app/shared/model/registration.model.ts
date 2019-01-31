@@ -98,6 +98,7 @@ export interface IRegistration {
   ssly1?: string;
   createdDate?: number;
   modifiedDate?: number;
+  fbzt?: number;
 }
 
-export const defaultValue: Readonly<IRegistration> = {};
+export const defaultValue: Readonly<IRegistration> = { fbzt: 0 };

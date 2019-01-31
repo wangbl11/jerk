@@ -7,7 +7,7 @@ import Jerk from './jerk';
 import JerkDetail from './jerk-detail';
 import JerkUpdate from './jerk-update';
 import JerkDeleteDialog from './jerk-delete-dialog';
-
+import RegistrationUpdate from '../registration/registration-update';
 const Routes = ({ match }) => (
   <>
     <Switch>
@@ -15,6 +15,7 @@ const Routes = ({ match }) => (
       <ErrorBoundaryRoute exact path={`${match.url}/:id/edit`} component={JerkUpdate} />
       <ErrorBoundaryRoute exact path={`${match.url}/:id`} component={JerkDetail} />
       <ErrorBoundaryRoute path={match.url} component={Jerk} />
+      <ErrorBoundaryRoute exact path="/entity/registration/:jerkId/new" component={RegistrationUpdate} />
     </Switch>
     <ErrorBoundaryRoute path={`${match.url}/:id/delete`} component={JerkDeleteDialog} />
   </>

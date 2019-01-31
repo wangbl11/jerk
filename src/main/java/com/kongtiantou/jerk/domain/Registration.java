@@ -213,11 +213,14 @@ public class Registration implements Serializable {
     private String ssly1;
 
     @NotNull
-    @Column(name = "created_date", nullable = false)
+    @Column(name = "created_date")
     private Long createdDate;
 
     @Column(name = "modified_date")
     private Long modifiedDate;
+
+    @OneToOne(fetch = FetchType.LAZY,mappedBy = "jerkInfo")
+    private Jerk jerk;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {

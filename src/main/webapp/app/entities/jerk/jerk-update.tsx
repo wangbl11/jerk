@@ -29,6 +29,8 @@ export interface IJerkUpdateState {
 export class JerkUpdate extends React.Component<IJerkUpdateProps, IJerkUpdateState> {
   constructor(props) {
     super(props);
+    console.log(this.props.match.params['jerkId']);
+    //this.props.location.query.bar
     this.state = {
       jerkInfoId: '0',
       preferenceId: '0',
@@ -115,20 +117,6 @@ export class JerkUpdate extends React.Component<IJerkUpdateProps, IJerkUpdateSta
                   />
                 </AvGroup>
                 <AvGroup>
-                  <Label id="passwdLabel" for="passwd">
-                    <Translate contentKey="jerkkApp.jerk.passwd">Passwd</Translate>
-                  </Label>
-                  <AvField
-                    id="jerk-passwd"
-                    type="text"
-                    name="passwd"
-                    validate={{
-                      required: { value: true, errorMessage: translate('entity.validation.required') },
-                      maxLength: { value: 60, errorMessage: translate('entity.validation.maxlength', { max: 60 }) }
-                    }}
-                  />
-                </AvGroup>
-                <AvGroup>
                   <Label id="displaynameLabel" for="displayname">
                     <Translate contentKey="jerkkApp.jerk.displayname">Displayname</Translate>
                   </Label>
@@ -159,31 +147,7 @@ export class JerkUpdate extends React.Component<IJerkUpdateProps, IJerkUpdateSta
                     <option value="A1">
                       <Translate contentKey="jerkkApp.AuthStatusEnum.A1" />
                     </option>
-                    <option value="A2">
-                      <Translate contentKey="jerkkApp.AuthStatusEnum.A2" />
-                    </option>
                   </AvInput>
-                </AvGroup>
-                <AvGroup>
-                  <Label id="createdDateLabel" for="createdDate">
-                    <Translate contentKey="jerkkApp.jerk.createdDate">Created Date</Translate>
-                  </Label>
-                  <AvField
-                    id="jerk-createdDate"
-                    type="string"
-                    className="form-control"
-                    name="createdDate"
-                    validate={{
-                      required: { value: true, errorMessage: translate('entity.validation.required') },
-                      number: { value: true, errorMessage: translate('entity.validation.number') }
-                    }}
-                  />
-                </AvGroup>
-                <AvGroup>
-                  <Label id="modifiedDateLabel" for="modifiedDate">
-                    <Translate contentKey="jerkkApp.jerk.modifiedDate">Modified Date</Translate>
-                  </Label>
-                  <AvField id="jerk-modifiedDate" type="string" className="form-control" name="modifiedDate" />
                 </AvGroup>
                 <AvGroup>
                   <Label for="jerkInfo.id">

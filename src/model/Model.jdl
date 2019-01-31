@@ -88,7 +88,8 @@ entity Registration {
    lxdz String required maxlength(120),
    ssly1 String maxlength(60),
    createdDate Long required,
-   modifiedDate Long
+   modifiedDate Long,
+   fbzt Integer required
 }
 
 entity Tag {

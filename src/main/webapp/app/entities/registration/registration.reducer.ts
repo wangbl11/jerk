@@ -4,9 +4,12 @@ import { ICrudSearchAction, ICrudGetAction, ICrudGetAllAction, ICrudPutAction, I
 import { cleanEntity } from 'app/shared/util/entity-utils';
 import { REQUEST, SUCCESS, FAILURE } from 'app/shared/reducers/action-type.util';
 
+import { IJerk, defaultValue as defaultJerkValue } from 'app/shared/model/jerk.model';
 import { IRegistration, defaultValue } from 'app/shared/model/registration.model';
 
 export const ACTION_TYPES = {
+  FETCH_JERK: 'jerk/FETCH_JERK',
+  UPDATE_JERK: 'jerk/UPDATE_JERK',
   SEARCH_REGISTRATIONS: 'registration/SEARCH_REGISTRATIONS',
   FETCH_REGISTRATION_LIST: 'registration/FETCH_REGISTRATION_LIST',
   FETCH_REGISTRATION: 'registration/FETCH_REGISTRATION',
@@ -21,6 +24,7 @@ const initialState = {
   errorMessage: null,
   entities: [] as ReadonlyArray<IRegistration>,
   entity: defaultValue,
+  jerk: defaultJerkValue,
   updating: false,
   totalItems: 0,
   updateSuccess: false
@@ -34,6 +38,7 @@ export default (state: RegistrationState = initialState, action): RegistrationSt
   switch (action.type) {
     case REQUEST(ACTION_TYPES.SEARCH_REGISTRATIONS):
     case REQUEST(ACTION_TYPES.FETCH_REGISTRATION_LIST):
+    case REQUEST(ACTION_TYPES.FETCH_JERK):
     case REQUEST(ACTION_TYPES.FETCH_REGISTRATION):
       return {
         ...state,
@@ -42,6 +47,7 @@ export default (state: RegistrationState = initialState, action): RegistrationSt
         loading: true
       };
     case REQUEST(ACTION_TYPES.CREATE_REGISTRATION):
+    case REQUEST(ACTION_TYPES.UPDATE_JERK):
     case REQUEST(ACTION_TYPES.UPDATE_REGISTRATION):
     case REQUEST(ACTION_TYPES.DELETE_REGISTRATION):
       return {
@@ -52,8 +58,10 @@ export default (state: RegistrationState = initialState, action): RegistrationSt
       };
     case FAILURE(ACTION_TYPES.SEARCH_REGISTRATIONS):
     case FAILURE(ACTION_TYPES.FETCH_REGISTRATION_LIST):
+    case FAILURE(ACTION_TYPES.FETCH_JERK):
     case FAILURE(ACTION_TYPES.FETCH_REGISTRATION):
     case FAILURE(ACTION_TYPES.CREATE_REGISTRATION):
+    case FAILURE(ACTION_TYPES.UPDATE_JERK):
     case FAILURE(ACTION_TYPES.UPDATE_REGISTRATION):
     case FAILURE(ACTION_TYPES.DELETE_REGISTRATION):
       return {
@@ -71,6 +79,12 @@ export default (state: RegistrationState = initialState, action): RegistrationSt
         totalItems: action.payload.headers['x-total-count'],
         entities: action.payload.data
       };
+    case SUCCESS(ACTION_TYPES.FETCH_JERK):
+      return {
+        ...state,
+        loading: false,
+        jerk: action.payload.data
+      };
     case SUCCESS(ACTION_TYPES.FETCH_REGISTRATION):
       return {
         ...state,
@@ -78,6 +92,13 @@ export default (state: RegistrationState = initialState, action): RegistrationSt
         entity: action.payload.data
       };
     case SUCCESS(ACTION_TYPES.CREATE_REGISTRATION):
+    case SUCCESS(ACTION_TYPES.UPDATE_JERK):
+      return {
+        ...state,
+        updating: false,
+        updateSuccess: true,
+        jerk: action.payload.data
+      };
     case SUCCESS(ACTION_TYPES.UPDATE_REGISTRATION):
       return {
         ...state,
@@ -100,7 +121,7 @@ export default (state: RegistrationState = initialState, action): RegistrationSt
       return state;
   }
 };
-
+const apiJerkUrl = 'api/jerks';
 const apiUrl = 'api/registrations';
 const apiSearchUrl = 'api/_search/registrations';
 
@@ -119,6 +140,14 @@ export const getEntities: ICrudGetAllAction<IRegistration> = (page, size, sort) 
   };
 };
 
+export const getJerkEntity: ICrudGetAction<IJerk> = id => {
+  const requestUrl = `${apiJerkUrl}/${id}`;
+  return {
+    type: ACTION_TYPES.FETCH_JERK,
+    payload: axios.get<IJerk>(requestUrl)
+  };
+};
+
 export const getEntity: ICrudGetAction<IRegistration> = id => {
   const requestUrl = `${apiUrl}/${id}`;
   return {
@@ -131,6 +160,15 @@ export const createEntity: ICrudPutAction<IRegistration> = entity => async dispa
   const result = await dispatch({
     type: ACTION_TYPES.CREATE_REGISTRATION,
     payload: axios.post(apiUrl, cleanEntity(entity))
+  });
+  dispatch(getEntities());
+  return result;
+};
+
+export const updateJerkEntity: ICrudPutAction<IJerk> = entity => async dispatch => {
+  const result = await dispatch({
+    type: ACTION_TYPES.UPDATE_JERK,
+    payload: axios.put(apiJerkUrl, entity)
   });
   dispatch(getEntities());
   return result;

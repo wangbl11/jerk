@@ -35,12 +35,6 @@ export class JerkDetail extends React.Component<IJerkDetailProps> {
             </dt>
             <dd>{jerkEntity.username}</dd>
             <dt>
-              <span id="passwd">
-                <Translate contentKey="jerkkApp.jerk.passwd">Passwd</Translate>
-              </span>
-            </dt>
-            <dd>{jerkEntity.passwd}</dd>
-            <dt>
               <span id="displayname">
                 <Translate contentKey="jerkkApp.jerk.displayname">Displayname</Translate>
               </span>
@@ -51,7 +45,9 @@ export class JerkDetail extends React.Component<IJerkDetailProps> {
                 <Translate contentKey="jerkkApp.jerk.authStatus">Auth Status</Translate>
               </span>
             </dt>
-            <dd>{jerkEntity.authStatus}</dd>
+            <dd>
+              <Translate contentKey={`jerkkApp.AuthStatusEnum.${jerkEntity.authStatus}`} />
+            </dd>
             <dt>
               <span id="createdDate">
                 <Translate contentKey="jerkkApp.jerk.createdDate">Created Date</Translate>
