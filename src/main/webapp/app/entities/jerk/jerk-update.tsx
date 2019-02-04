@@ -30,7 +30,7 @@ export class JerkUpdate extends React.Component<IJerkUpdateProps, IJerkUpdateSta
   constructor(props) {
     super(props);
     console.log(this.props.match.params['jerkId']);
-    //this.props.location.query.bar
+    // this.props.location.query.bar
     this.state = {
       jerkInfoId: '0',
       preferenceId: '0',

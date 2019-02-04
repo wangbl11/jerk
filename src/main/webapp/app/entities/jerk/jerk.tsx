@@ -162,7 +162,7 @@ export class Jerk extends React.Component<IJerkProps, IJerkState> {
 
                   <td dangerouslySetInnerHTML={{ __html: jerk.displayname }} />
                   <td>
-                    {jerk.authStatus == 'A0' ? (
+                    {jerk.authStatus === 'A0' ? (
                       <button onClick={() => this.setActive(jerk, true)} className="btn btn-danger btn-sm">
                         non-certificated
                       </button>
@@ -180,12 +180,12 @@ export class Jerk extends React.Component<IJerkProps, IJerkState> {
                   </td>
                   <td>
                     {jerk.jerkInfo ? (
-                      jerk.jerkInfo.fbzt == 1 ? (
-                        <Link to={`registration/${jerk.jerkInfo.id}`} className="btn btn-primary">
+                      jerk.jerkInfo.fbzt === 1 ? (
+                        <Link to={`/entity/registration/${jerk.jerkInfo.id}`} className="btn btn-primary">
                           <Translate contentKey="jerkkApp.jerk.online">Published</Translate>
                         </Link>
                       ) : (
-                        <Link to={`registration/${jerk.jerkInfo.id}`} className="btn btn-primary">
+                        <Link to={`/entity/registration/${jerk.jerkInfo.id}`} className="btn btn-primary">
                           <Translate contentKey="jerkkApp.jerk.offline">Draft</Translate>
                         </Link>
                       )

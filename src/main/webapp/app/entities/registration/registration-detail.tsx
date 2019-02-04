@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import { Button, Row, Col } from 'reactstrap';
 // tslint:disable-next-line:no-unused-variable
-import { Translate, ICrudGetAction } from 'react-jhipster';
+import { Translate, ICrudGetAction, TextFormat } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { IRootState } from 'app/shared/reducers';
@@ -11,6 +11,7 @@ import { getEntity } from './registration.reducer';
 import { IRegistration } from 'app/shared/model/registration.model';
 // tslint:disable-next-line:no-unused-variable
 import { APP_DATE_FORMAT, APP_LOCAL_DATE_FORMAT } from 'app/config/constants';
+import registration from './registration';
 
 export interface IRegistrationDetailProps extends StateProps, DispatchProps, RouteComponentProps<{ id: string }> {}
 
@@ -261,13 +262,17 @@ export class RegistrationDetail extends React.Component<IRegistrationDetailProps
                 <Translate contentKey="jerkkApp.registration.createdDate">Created Date</Translate>
               </span>
             </dt>
-            <dd>{registrationEntity.createdDate}</dd>
+            <dd>
+              <TextFormat value={registrationEntity.createdDate} type="date" format={APP_DATE_FORMAT} blankOnInvalid />
+            </dd>
             <dt>
               <span id="modifiedDate">
                 <Translate contentKey="jerkkApp.registration.modifiedDate">Modified Date</Translate>
               </span>
             </dt>
-            <dd>{registrationEntity.modifiedDate}</dd>
+            <dd>
+              <TextFormat value={registrationEntity.modifiedDate} type="date" format={APP_DATE_FORMAT} blankOnInvalid />
+            </dd>
           </dl>
           <Button tag={Link} to="/entity/registration" replace color="info">
             <FontAwesomeIcon icon="arrow-left" />{' '}
@@ -282,6 +287,22 @@ export class RegistrationDetail extends React.Component<IRegistrationDetailProps
               <Translate contentKey="entity.action.edit">Edit</Translate>
             </span>
           </Button>
+          &nbsp;
+          {registrationEntity.id && registrationEntity.fbzt == 1 ? (
+            <Button tag={Link} to={`/entity/registration/${registrationEntity.id}/changeActive`} replace color="info">
+              <FontAwesomeIcon icon="unlock" />{' '}
+              <span className="d-none d-md-inline">
+                <Translate contentKey="entity.action.offline">Offline</Translate>
+              </span>
+            </Button>
+          ) : (
+            <Button tag={Link} to={`/entity/registration/${registrationEntity.id}/changeActive`} replace color="info">
+              <FontAwesomeIcon icon="lock" />{' '}
+              <span className="d-none d-md-inline">
+                <Translate contentKey="entity.action.online">Online</Translate>
+              </span>
+            </Button>
+          )}
         </Col>
       </Row>
     );

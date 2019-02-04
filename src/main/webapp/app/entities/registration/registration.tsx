@@ -12,7 +12,8 @@ import {
   getSortState,
   IPaginationBaseState,
   getPaginationItemsNumber,
-  JhiPagination
+  JhiPagination,
+  TextFormat
 } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -313,8 +314,12 @@ export class Registration extends React.Component<IRegistrationProps, IRegistrat
                   <td>{registration.lxyx}</td>
                   <td>{registration.lxdz}</td>
                   <td>{registration.ssly1}</td>
-                  <td>{registration.createdDate}</td>
-                  <td>{registration.modifiedDate}</td>
+                  <td>
+                    <TextFormat value={registration.createdDate} type="date" format={APP_DATE_FORMAT} blankOnInvalid />
+                  </td>
+                  <td>
+                    <TextFormat value={registration.modifiedDate} type="date" format={APP_DATE_FORMAT} blankOnInvalid />
+                  </td>
                   <td className="text-right">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`${match.url}/${registration.id}`} color="info" size="sm">

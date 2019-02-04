@@ -103,7 +103,9 @@
       "edit": "Edit",
       "open": "Open",
       "save": "Save",
-      "view": "View"
+      "view": "View",
+      "online": "To Online",
+      "offlie": "To Offline"
     },
     "detail": {
       "field": "Field",
