@@ -219,6 +219,10 @@ public class Registration implements Serializable {
     @Column(name = "modified_date")
     private Long modifiedDate;
 
+
+    @Column(name = "fbzt")
+    private Integer fbzt;
+
     @OneToOne(fetch = FetchType.LAZY,mappedBy = "jerkInfo")
     private Jerk jerk;
 
@@ -723,6 +727,19 @@ public class Registration implements Serializable {
 
     public void setSsly1(String ssly1) {
         this.ssly1 = ssly1;
+    }
+
+    public Integer getFbzt(){
+        return fbzt;
+    }
+
+    public void setFbzt(Integer fbzt){
+        this.fbzt=fbzt;
+    }
+    
+    public Registration fbzt(Integer fbzt){
+        this.fbzt=fbzt;
+        return this;
     }
 
     public Long getCreatedDate() {

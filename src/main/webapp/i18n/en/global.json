@@ -105,7 +105,7 @@
       "save": "Save",
       "view": "View",
       "online": "To Online",
-      "offlie": "To Offline"
+      "offline": "To Offline"
     },
     "detail": {
       "field": "Field",

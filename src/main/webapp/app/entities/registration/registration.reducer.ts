@@ -88,6 +88,8 @@ export default (state: RegistrationState = initialState, action): RegistrationSt
     case SUCCESS(ACTION_TYPES.FETCH_REGISTRATION):
       return {
         ...state,
+        updateSuccess: false,
+        updating: false,
         loading: false,
         entity: action.payload.data
       };

@@ -7,19 +7,33 @@ import { Translate, ICrudGetAction, TextFormat } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { IRootState } from 'app/shared/reducers';
-import { getEntity } from './registration.reducer';
+import { getEntity, updateEntity } from './registration.reducer';
 import { IRegistration } from 'app/shared/model/registration.model';
 // tslint:disable-next-line:no-unused-variable
 import { APP_DATE_FORMAT, APP_LOCAL_DATE_FORMAT } from 'app/config/constants';
 import registration from './registration';
-
+import { cleanEntity } from 'app/shared/util/entity-utils';
 export interface IRegistrationDetailProps extends StateProps, DispatchProps, RouteComponentProps<{ id: string }> {}
 
 export class RegistrationDetail extends React.Component<IRegistrationDetailProps> {
   componentDidMount() {
     this.props.getEntity(this.props.match.params.id);
   }
+  componentWillUpdate(nextProps, nextState) {
+    if (nextProps.updateSuccess !== this.props.updateSuccess && nextProps.updateSuccess) {
+      this.handleClose();
+    }
+  }
 
+  handleClose = () => {
+    this.props.history.push('/entity/registration');
+  };
+  setActive(registrationEntity, sts) {
+    let _registration = cleanEntity(registrationEntity);
+    _registration.fbzt = sts ? 1 : 0;
+    console.log('in setactive');
+    this.props.updateEntity(_registration);
+  }
   render() {
     const { registrationEntity } = this.props;
     return (
@@ -289,14 +303,14 @@ export class RegistrationDetail extends React.Component<IRegistrationDetailProps
           </Button>
           &nbsp;
           {registrationEntity.id && registrationEntity.fbzt == 1 ? (
-            <Button tag={Link} to={`/entity/registration/${registrationEntity.id}/changeActive`} replace color="info">
+            <Button onClick={() => this.setActive(registrationEntity, false)} color="info">
               <FontAwesomeIcon icon="unlock" />{' '}
               <span className="d-none d-md-inline">
                 <Translate contentKey="entity.action.offline">Offline</Translate>
               </span>
             </Button>
           ) : (
-            <Button tag={Link} to={`/entity/registration/${registrationEntity.id}/changeActive`} replace color="info">
+            <Button onClick={() => this.setActive(registrationEntity, true)} color="info">
               <FontAwesomeIcon icon="lock" />{' '}
               <span className="d-none d-md-inline">
                 <Translate contentKey="entity.action.online">Online</Translate>
@@ -310,10 +324,16 @@ export class RegistrationDetail extends React.Component<IRegistrationDetailProps
 }
 
 const mapStateToProps = ({ registration }: IRootState) => ({
-  registrationEntity: registration.entity
+  registrationEntity: registration.entity,
+  loading: registration.loading,
+  updating: registration.updating,
+  updateSuccess: registration.updateSuccess
 });
 
-const mapDispatchToProps = { getEntity };
+const mapDispatchToProps = {
+  getEntity,
+  updateEntity
+};
 
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = typeof mapDispatchToProps;
