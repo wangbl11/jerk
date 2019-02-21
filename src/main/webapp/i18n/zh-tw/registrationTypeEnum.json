@@ -1,0 +1,9 @@
+{
+  "jerkkApp": {
+    "RegistrationTypeEnum": {
+      "null": "",
+      "0": "創新",
+      "1": "創業"
+    }
+  }
+}

@@ -58,11 +58,15 @@ export class JerkUpdate extends React.Component<IJerkUpdateProps, IJerkUpdateSta
   saveEntity = (event, errors, values) => {
     if (errors.length === 0) {
       const { jerkEntity } = this.props;
+      const preference = {
+        ...jerkEntity.preference,
+        ...values.preference
+      };
       const entity = {
         ...jerkEntity,
-        ...values
+        ...values,
+        preference
       };
-
       if (this.state.isNew) {
         this.props.createEntity(entity);
       } else {
@@ -84,7 +88,7 @@ export class JerkUpdate extends React.Component<IJerkUpdateProps, IJerkUpdateSta
         <Row className="justify-content-center">
           <Col md="8">
             <h2 id="jerkkApp.jerk.home.createOrEditLabel">
-              <Translate contentKey="jerkkApp.jerk.home.createOrEditLabel">Create or edit a Jerk</Translate>
+              <Translate contentKey={`jerkkApp.jerk.home.${jerkEntity.id ? 'editLabel' : 'createLabel'}`}>Create or edit a Jerk</Translate>
             </h2>
           </Col>
         </Row>
@@ -150,34 +154,29 @@ export class JerkUpdate extends React.Component<IJerkUpdateProps, IJerkUpdateSta
                   </AvInput>
                 </AvGroup>
                 <AvGroup>
-                  <Label for="jerkInfo.id">
-                    <Translate contentKey="jerkkApp.jerk.jerkInfo">Jerk Info</Translate>
+                  <Label id="wechatLabel" for="wechat">
+                    <Translate contentKey="jerkkApp.preference.wechat">Wechat</Translate>
                   </Label>
-                  <AvInput id="jerk-jerkInfo" type="select" className="form-control" name="jerkInfo.id">
-                    <option value="" key="0" />
-                    {registrations
-                      ? registrations.map(otherEntity => (
-                          <option value={otherEntity.id} key={otherEntity.id}>
-                            {otherEntity.id}
-                          </option>
-                        ))
-                      : null}
-                  </AvInput>
+                  <AvField
+                    id="preference-wechat"
+                    type="text"
+                    name="preference.wechat"
+                    validate={{
+                      required: { value: true, errorMessage: translate('entity.validation.required') }
+                    }}
+                  />
                 </AvGroup>
                 <AvGroup>
-                  <Label for="preference.id">
-                    <Translate contentKey="jerkkApp.jerk.preference">Preference</Translate>
+                  <Label id="addressLabel" for="address">
+                    <Translate contentKey="jerkkApp.preference.address">Address</Translate>
                   </Label>
-                  <AvInput id="jerk-preference" type="select" className="form-control" name="preference.id">
-                    <option value="" key="0" />
-                    {preferences
-                      ? preferences.map(otherEntity => (
-                          <option value={otherEntity.id} key={otherEntity.id}>
-                            {otherEntity.id}
-                          </option>
-                        ))
-                      : null}
-                  </AvInput>
+                  <AvField id="preference-address" type="text" name="preference.address" />
+                </AvGroup>
+                <AvGroup>
+                  <Label id="imageUrlLabel" for="imageUrl">
+                    <Translate contentKey="jerkkApp.preference.imageUrl">Image Url</Translate>
+                  </Label>
+                  <AvField id="preference-imageUrl" type="text" name="preference.imageUrl" />
                 </AvGroup>
                 <Button tag={Link} id="cancel-save" to="/entity/jerk" replace color="info">
                   <FontAwesomeIcon icon="arrow-left" />

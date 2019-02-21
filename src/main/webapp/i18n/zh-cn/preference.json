@@ -2,26 +2,26 @@
   "jerkkApp": {
     "preference": {
       "home": {
-        "title": "Preferences",
-        "createLabel": "创建新 Preference",
-        "createOrEditLabel": "创建或编辑 Preference",
-        "search": "查找 Preference"
+        "title": "個人詳細信息",
+        "createLabel": "建立一筆新的 Preference",
+        "createOrEditLabel": "建立或編輯 Preference",
+        "search": "搜尋 Preference"
       },
-      "created": "Preference {{ param }} 创建成功",
-      "updated": "Preference {{ param }} 更新成功",
-      "deleted": "Preference {{ param }} 删除成功",
+      "created": "新的 Preference 建立成功，識別碼為 {{ param }}",
+      "updated": "識別碼為 {{ param }} 的 Preference 更新成功",
+      "deleted": "識別碼為 {{ param }} 的 Preference 刪除成功",
       "delete": {
-        "question": "你确定要删除 Preference {{ id }} 吗？"
+        "question": "您確定要刪除 Preference {{ id }} 嗎?"
       },
       "detail": {
-        "title": "Preference"
+        "title": "個人詳細信息"
       },
-      "wechat": "Wechat",
-      "address": "Address",
-      "imageUrl": "Image Url",
-      "lang": "Lang",
-      "createdDate": "Created Date",
-      "modifiedDate": "Modified Date"
+      "wechat": "微信號",
+      "address": "地址",
+      "imageUrl": "照片",
+      "lang": "語言",
+      "createdDate": "創建時間",
+      "modifiedDate": "修改時間"
     }
   }
 }

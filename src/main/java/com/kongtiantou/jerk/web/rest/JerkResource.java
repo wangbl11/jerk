@@ -51,21 +51,23 @@ public class JerkResource {
     private final JerkSearchRepository jerkSearchRepository;
 
     private final JestElasticsearchTemplate elasticsearchTemplate;
-    
+
     @Resource
     private ExtJestSearchResultMapper extJestSearchResultMapper;
 
-    public JerkResource(JerkRepository jerkRepository, JerkSearchRepository jerkSearchRepository,JestElasticsearchTemplate elasticsearchTemplate) {
+    public JerkResource(JerkRepository jerkRepository, JerkSearchRepository jerkSearchRepository,
+            JestElasticsearchTemplate elasticsearchTemplate) {
         this.jerkRepository = jerkRepository;
         this.jerkSearchRepository = jerkSearchRepository;
         this.elasticsearchTemplate = elasticsearchTemplate;
     }
 
     /**
-     * POST  /jerks : Create a new jerk.
+     * POST /jerks : Create a new jerk.
      *
      * @param jerk the jerk to create
-     * @return the ResponseEntity with status 201 (Created) and with body the new jerk, or with status 400 (Bad Request) if the jerk has already an ID
+     * @return the ResponseEntity with status 201 (Created) and with body the new
+     *         jerk, or with status 400 (Bad Request) if the jerk has already an ID
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PostMapping("/jerks")
@@ -79,17 +81,17 @@ public class JerkResource {
         Jerk result = jerkRepository.save(jerk);
         jerkSearchRepository.save(result);
         return ResponseEntity.created(new URI("/api/jerks/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
-            .body(result);
+                .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString())).body(result);
     }
 
     /**
-     * PUT  /jerks : Updates an existing jerk.
+     * PUT /jerks : Updates an existing jerk.
      *
      * @param jerk the jerk to update
-     * @return the ResponseEntity with status 200 (OK) and with body the updated jerk,
-     * or with status 400 (Bad Request) if the jerk is not valid,
-     * or with status 500 (Internal Server Error) if the jerk couldn't be updated
+     * @return the ResponseEntity with status 200 (OK) and with body the updated
+     *         jerk, or with status 400 (Bad Request) if the jerk is not valid, or
+     *         with status 500 (Internal Server Error) if the jerk couldn't be
+     *         updated
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PutMapping("/jerks")
@@ -99,19 +101,29 @@ public class JerkResource {
         if (jerk.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
-        if (jerk.getJerkInfo()!=null&&jerk.getJerkInfo().getId()==null){
-            jerk.getJerkInfo().setCreatedDate(System.currentTimeMillis());
+        if (jerk.getJerkInfo() != null) {
+            if (jerk.getJerkInfo().getId() == null)
+                jerk.getJerkInfo().setCreatedDate(System.currentTimeMillis());
+            else {
+                System.out.println("~~~~~");
+                jerk.getJerkInfo().setModifiedDate(System.currentTimeMillis());
+            }
+        }
+        if (jerk.getPreference() != null) {
+            if (jerk.getPreference().getId() == null)
+                jerk.getPreference().setCreatedDate(System.currentTimeMillis());
+            else
+                jerk.getPreference().setModifiedDate(System.currentTimeMillis());
         }
         jerk.setModifiedDate(System.currentTimeMillis());
         Jerk result = jerkRepository.save(jerk);
         jerkSearchRepository.save(result);
-        return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, jerk.getId().toString()))
-            .body(result);
+        return ResponseEntity.ok().headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, jerk.getId().toString()))
+                .body(result);
     }
 
     /**
-     * GET  /jerks : get all the jerks.
+     * GET /jerks : get all the jerks.
      *
      * @param pageable the pagination information
      * @return the ResponseEntity with status 200 (OK) and the list of jerks in body
@@ -126,10 +138,11 @@ public class JerkResource {
     }
 
     /**
-     * GET  /jerks/:id : get the "id" jerk.
+     * GET /jerks/:id : get the "id" jerk.
      *
      * @param id the id of the jerk to retrieve
-     * @return the ResponseEntity with status 200 (OK) and with body the jerk, or with status 404 (Not Found)
+     * @return the ResponseEntity with status 200 (OK) and with body the jerk, or
+     *         with status 404 (Not Found)
      */
     @GetMapping("/jerks/{id}")
     @Timed
@@ -140,7 +153,7 @@ public class JerkResource {
     }
 
     /**
-     * DELETE  /jerks/:id : delete the "id" jerk.
+     * DELETE /jerks/:id : delete the "id" jerk.
      *
      * @param id the id of the jerk to delete
      * @return the ResponseEntity with status 200 (OK)
@@ -156,10 +169,10 @@ public class JerkResource {
     }
 
     /**
-     * SEARCH  /_search/jerks?query=:query : search for the jerk corresponding
-     * to the query.
+     * SEARCH /_search/jerks?query=:query : search for the jerk corresponding to the
+     * query.
      *
-     * @param query the query of the jerk search
+     * @param query    the query of the jerk search
      * @param pageable the pagination information
      * @return the result of the search
      */
@@ -167,19 +180,24 @@ public class JerkResource {
     @Timed
     public ResponseEntity<List<Jerk>> searchJerks(@RequestParam String query, Pageable pageable) {
         log.debug("REST request to search for a page of Jerks for query {}", query);
-        // Page<Jerk> page = jerkSearchRepository.search(queryStringQuery(query), pageable);
-        QueryBuilder _query=QueryBuilders.multiMatchQuery(query, "displayname","username");
-        
-        QueryBuilder _query1=QueryBuilders.boolQuery().should(QueryBuilders.queryStringQuery(query).field("displayname").field("username"));
-        
-        QueryBuilder _query2=QueryBuilders.queryStringQuery(query).field("displayname").field("username");
-        
-        SearchQuery searchQuery = new NativeSearchQueryBuilder()
-                .withQuery(_query2)
-                .withHighlightFields(new HighlightBuilder.Field("displayname").preTags("<span style='background-color:yellow'>").postTags("</span>"),
-                        new HighlightBuilder.Field("username").preTags("<span style='background-color:yellow'>").postTags("</span>")).build();    
-        searchQuery.setPageable(pageable);     
-        
+        // Page<Jerk> page = jerkSearchRepository.search(queryStringQuery(query),
+        // pageable);
+        QueryBuilder _query = QueryBuilders.multiMatchQuery(query, "displayname", "username");
+
+        QueryBuilder _query1 = QueryBuilders.boolQuery()
+                .should(QueryBuilders.queryStringQuery(query).field("displayname").field("username"));
+
+        QueryBuilder _query2 = QueryBuilders.queryStringQuery(query).field("displayname").field("username");
+
+        SearchQuery searchQuery = new NativeSearchQueryBuilder().withQuery(_query2)
+                .withHighlightFields(
+                        new HighlightBuilder.Field("displayname").preTags("<span style='background-color:yellow'>")
+                                .postTags("</span>"),
+                        new HighlightBuilder.Field("username").preTags("<span style='background-color:yellow'>")
+                                .postTags("</span>"))
+                .build();
+        searchQuery.setPageable(pageable);
+
         Page<Jerk> page = elasticsearchTemplate.queryForPage(searchQuery, Jerk.class, extJestSearchResultMapper);
 
         HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/_search/jerks");

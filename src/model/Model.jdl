@@ -1,125 +1,118 @@
-enum SettingTypeEnum{
-        STRING,INTEGER,BOOL
+enum RegistrationTypeEnum {
+    CHUANGXIN, CHUANGYE
 }
-
+enum SettingTypeEnum {
+    STRING, INTEGER, BOOL
+}
 enum AuthStatusEnum {
-        A0,A1,A2
+    A0, A1, A2
 }
-
 enum Decision {
-  YES,NO
+    YES, NO
 }
 enum HxjslyEnum {
- S1, S2, S3, S4, OTHER
+    S1, S2, S3, S4, OTHER
 }
 enum KjcgzhEnum {
- S1,S2,S3,OTHER
+    S1, S2, S3, OTHER
 }
 enum JmlyqkEnum {
-  K1,K2,K3
+    K1, K2, K3
 }
 enum XbEnum {
-  MAN,WOMAN
+    MAN, WOMAN
 }
 enum AgeEnum {
-  A1,A2,A3,A4,A5,A6,A7
+    A1, A2, A3, A4, A5, A6, A7
 }
-enum RzmbEnum{
-   R1,R2,R3,R4,R5,R6,R7,R8
+enum RzmbEnum {
+    R1, R2, R3, R4, R5, R6, R7, R8
 }
-enum RzjhgkfwEnum{
-  O1,O2,O3
+enum RzjhgkfwEnum {
+    O1, O2, O3
 }
-
 entity Jerk{
-        username String required maxlength(100),
-        passwd String required maxlength(60),
-        displayname String required maxlength(100),
-        authStatus AuthStatusEnum required,
-        createdDate Long required,
-        modifiedDate Long
+    username String required maxlength(100),
+    passwd String required maxlength(60),
+    displayname String required maxlength(100),
+    authStatus AuthStatusEnum required,
+    createdDate Long required,
+    modifiedDate Long
 }
-
 entity Preference {
-        wechat String required,
-        address String,
-        imageUrl String,
-        lang String,
-        createdDate Long required,
-        modifiedDate Long
+    wechat String required,
+    address String,
+    imageUrl String,
+    lang String,
+    createdDate Long required,
+    modifiedDate Long
 }
 entity Registration {
-   registType Integer required,
-   dwqc String required maxlength(60),
-   hxcpmc String required maxlength(120),
-   zztjdw String,
-   dwhgrdz String required maxlength(100),
-   szqylx String required,
-   ssly String required,
-   gscpjj String required maxlength(360),
-   mbkhsc String required,
-   dqzykh String ,
-   gnwhjjx String maxlength(500),
-   zljs Decision required,
-   hxjsly HxjslyEnum required,
-   kjcgzh KjcgzhEnum required,
-   jmlyqk JmlyqkEnum required,
-   jscsd String maxlength(120),
-   jzmsylqk String maxlength(500),
-   jzysjs String required maxlength(500),
-   fzrdh String required maxlength(20),
-   xb XbEnum required,
-   lxfs String required maxlength(36),
-   email String required maxlength(36),
-   fzrnl AgeEnum required,
-   tdpjnl AgeEnum ,
-   gjrcs Integer required,
-   sfgjrzgxjsqy Decision required,
-   tdysjs String required maxlength(500),
-   xycz String required maxlength(24),
-   wlxwhdzclx String required maxlength(36),
-   wlxwhdzclx1 String maxlength(100),
-   sfxyxc String maxlength(100),
-   rzjhgkfw RzjhgkfwEnum,
-   rzmb RzmbEnum,
-   lxrzw String required maxlength(100),
-   lxdh String required,
-   lxyx String required maxlength(60),
-   lxdz String required maxlength(120),
-   ssly1 String maxlength(60),
-   createdDate Long required,
-   modifiedDate Long,
-   fbzt Integer required
+    registType Integer required,
+    dwqc String required maxlength(60),
+    hxcpmc String required maxlength(120),
+    zztjdw String,
+    dwhgrdz String required maxlength(100),
+    szqylx String required,
+    ssly String required,
+    gscpjj String required maxlength(360),
+    mbkhsc String required,
+    dqzykh String,
+    gnwhjjx String maxlength(500),
+    zljs Decision required,
+    hxjsly HxjslyEnum required,
+    kjcgzh KjcgzhEnum required,
+    jmlyqk JmlyqkEnum required,
+    jscsd String maxlength(120),
+    jzmsylqk String maxlength(500),
+    jzysjs String required maxlength(500),
+    fzrdh String required maxlength(20),
+    xb XbEnum required,
+    lxfs String required maxlength(36),
+    email String required maxlength(36),
+    fzrnl AgeEnum required,
+    tdpjnl AgeEnum,
+    gjrcs Integer required,
+    sfgjrzgxjsqy Decision required,
+    tdysjs String required maxlength(500),
+    xycz String required maxlength(24),
+    wlxwhdzclx String required maxlength(36),
+    wlxwhdzclx1 String maxlength(100),
+    sfxyxc String maxlength(100),
+    rzjhgkfw RzjhgkfwEnum,
+    rzmb RzmbEnum,
+    lxrzw String required maxlength(100),
+    lxdh String required,
+    lxyx String required maxlength(60),
+    lxdz String required maxlength(120),
+    ssly1 String maxlength(60),
+    createdDate Long required,
+    modifiedDate Long,
+    fbzt Integer required
 }
-
 entity Tag {
-        name String required maxlength(24),
-        type Integer required,
-        status Integer required,
-        weight Integer required,
-        createdDate Long required,
-        modifiedDate Long
+    name String required maxlength(24),
+    type Integer required,
+    status Integer required,
+    weight Integer required,
+    createdDate Long required,
+    modifiedDate Long
 }
-
 entity Setting {
-        name String required maxlength(100),
-        type SettingTypeEnum required ,
-        value String required maxlength(200) ,
-        defvalue String required maxlength(200),
-        createdDate Long required,
-        modifiedDate Long
+    name String required maxlength(100),
+    type SettingTypeEnum required,
+    value String required maxlength(200),
+    defvalue String required maxlength(200),
+    createdDate Long required,
+    modifiedDate Long
 }
-
 relationship OneToOne {
-        Jerk{jerkInfo} to Registration,
-        Jerk{preference} to Preference
+    Jerk{jerkInfo} to Registration , Jerk{preference} to Preference
 }
-
 // Set pagination options
 paginate Jerk with pagination
 paginate Registration with pagination
 paginate Setting with pagination
 paginate Tag with pagination
-
 // Set an angular suffix
 //angularSuffix * with guoyiSuffix

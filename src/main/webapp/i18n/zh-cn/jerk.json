@@ -2,28 +2,40 @@
   "jerkkApp": {
     "jerk": {
       "home": {
-        "title": "Jerks",
-        "createLabel": "创建新 Jerk",
-        "createOrEditLabel": "创建或编辑 Jerk",
-        "search": "查找 Jerk"
+        "title": "极客",
+        "createLabel": "创建",
+        "editLabel": "编辑极客",
+        "search": "查找 极客"
       },
-      "created": "Jerk {{ param }} 创建成功",
-      "updated": "Jerk {{ param }} 更新成功",
-      "deleted": "Jerk {{ param }} 删除成功",
+      "created": "极客 {{ param }} 创建成功",
+      "updated": "极客 {{ param }} 更新成功",
+      "deleted": "极客 {{ param }} 删除成功",
       "delete": {
-        "question": "你确定要删除 Jerk {{ id }} 吗？"
+        "question": "你确定要删除极客 【{{ id }}】 吗？"
       },
       "detail": {
-        "title": "Jerk"
+        "title": "极客"
       },
-      "username": "Username",
-      "passwd": "Passwd",
-      "displayname": "Displayname",
-      "authStatus": "Auth Status",
-      "createdDate": "Created Date",
-      "modifiedDate": "Modified Date",
-      "jerkInfo": "Jerk Info",
-      "preference": "Preference"
+      "username": "用户名",
+      "passwd": "口令",
+      "displayname": "显示名字",
+      "authStatus": "认证状态",
+      "createdDate": "创建时间",
+      "modifiedDate": "修改时间",
+      "preference": "首选项",
+      "jerkInfo": "报名",
+      "jerkType": "报名類型",
+      "inbox": "收件箱",
+      "outbox": "发件箱",
+      "favorites": "收藏",
+      "certificate": "认证",
+      "certificated": "已认证",
+      "uncertificate": "收回认证",
+      "uncertificated": "未认证",
+      "registStatus": "报名状态",
+      "nonregistration": "未报名",
+      "online": "上线",
+      "offline": "下线"
     }
   }
 }

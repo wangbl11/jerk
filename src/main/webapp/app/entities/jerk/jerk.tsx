@@ -95,7 +95,7 @@ export class Jerk extends React.Component<IJerkProps, IJerkState> {
           <Link to={`${match.url}/new`} className="btn btn-primary float-right jh-create-entity" id="jh-create-entity">
             <FontAwesomeIcon icon="plus" />
             &nbsp;
-            <Translate contentKey="jerkkApp.jerk.home.createLabel">Create new Jerk</Translate>
+            <Translate contentKey={`jerkkApp.jerk.home.createLabel`}>Create new Jerk</Translate>
           </Link>
         </h2>
         <Row>
@@ -137,16 +137,18 @@ export class Jerk extends React.Component<IJerkProps, IJerkState> {
                 <th className="hand" onClick={this.sort('authStatus')}>
                   <Translate contentKey="jerkkApp.jerk.authStatus">Auth Status</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
+                <th>
+                  <Translate contentKey="jerkkApp.jerk.jerkInfo">Registration Info</Translate> <FontAwesomeIcon icon="sort" />
+                </th>
+                <th>
+                  <Translate contentKey="jerkkApp.jerk.jerkType">Registration Type</Translate> <FontAwesomeIcon icon="sort" />
+                </th>
                 <th className="hand" onClick={this.sort('createdDate')}>
                   <Translate contentKey="jerkkApp.jerk.createdDate">Created Date</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={this.sort('modifiedDate')}>
                   <Translate contentKey="jerkkApp.jerk.modifiedDate">Modified Date</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
-                <th>
-                  <Translate contentKey="jerkkApp.jerk.jerkInfo">Jerk Info</Translate> <FontAwesomeIcon icon="sort" />
-                </th>
-
                 <th />
               </tr>
             </thead>
@@ -164,19 +166,13 @@ export class Jerk extends React.Component<IJerkProps, IJerkState> {
                   <td>
                     {jerk.authStatus === 'A0' ? (
                       <button onClick={() => this.setActive(jerk, true)} className="btn btn-danger btn-sm">
-                        non-certificated
+                        <Translate contentKey={`jerkkApp.AuthStatusEnum.${jerk.authStatus}`} />
                       </button>
                     ) : (
                       <button onClick={() => this.setActive(jerk, false)} className="btn btn-danger btn-sm">
-                        certificated
+                        <Translate contentKey={`jerkkApp.AuthStatusEnum.${jerk.authStatus}`} />
                       </button>
                     )}
-                  </td>
-                  <td>
-                    <TextFormat value={jerk.createdDate} type="date" format={APP_DATE_FORMAT} blankOnInvalid />
-                  </td>
-                  <td>
-                    <TextFormat value={jerk.modifiedDate} type="date" format={APP_DATE_FORMAT} blankOnInvalid />
                   </td>
                   <td>
                     {jerk.jerkInfo ? (
@@ -194,6 +190,15 @@ export class Jerk extends React.Component<IJerkProps, IJerkState> {
                         <Translate contentKey="jerkkApp.jerk.nonregistration">No Registration</Translate>
                       </Link>
                     )}
+                  </td>
+                  <td>
+                    <Translate contentKey={`jerkkApp.RegistrationTypeEnum.${jerk.jerkInfo ? jerk.jerkInfo.registType : null}`} />
+                  </td>
+                  <td>
+                    <TextFormat value={jerk.createdDate} type="date" format={APP_DATE_FORMAT} blankOnInvalid />
+                  </td>
+                  <td>
+                    <TextFormat value={jerk.modifiedDate} type="date" format={APP_DATE_FORMAT} blankOnInvalid />
                   </td>
                   <td className="text-right">
                     <div className="btn-group flex-btn-group-container">

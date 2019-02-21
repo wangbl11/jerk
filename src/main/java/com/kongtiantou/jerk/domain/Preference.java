@@ -45,7 +45,11 @@ public class Preference implements Serializable {
     @Column(name = "modified_date")
     private Long modifiedDate;
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "preference")
+    private Jerk jerk;
+
+    // jhipster-needle-entity-add-field - JHipster will add fields here, do not
+    // remove
     public Long getId() {
         return id;
     }
@@ -131,7 +135,8 @@ public class Preference implements Serializable {
     public void setModifiedDate(Long modifiedDate) {
         this.modifiedDate = modifiedDate;
     }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and
+    // setters here, do not remove
 
     @Override
     public boolean equals(Object o) {
@@ -155,14 +160,8 @@ public class Preference implements Serializable {
 
     @Override
     public String toString() {
-        return "Preference{" +
-            "id=" + getId() +
-            ", wechat='" + getWechat() + "'" +
-            ", address='" + getAddress() + "'" +
-            ", imageUrl='" + getImageUrl() + "'" +
-            ", lang='" + getLang() + "'" +
-            ", createdDate=" + getCreatedDate() +
-            ", modifiedDate=" + getModifiedDate() +
-            "}";
+        return "Preference{" + "id=" + getId() + ", wechat='" + getWechat() + "'" + ", address='" + getAddress() + "'"
+                + ", imageUrl='" + getImageUrl() + "'" + ", lang='" + getLang() + "'" + ", createdDate="
+                + getCreatedDate() + ", modifiedDate=" + getModifiedDate() + "}";
     }
 }

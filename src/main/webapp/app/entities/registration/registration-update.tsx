@@ -99,16 +99,20 @@ export class RegistrationUpdate extends React.Component<IRegistrationUpdateProps
                   <Label id="registTypeLabel" for="registType">
                     <Translate contentKey="jerkkApp.registration.registType">Regist Type</Translate>
                   </Label>
-                  <AvField
+                  <AvInput
                     id="registration-registType"
-                    type="string"
+                    type="select"
                     className="form-control"
                     name="registType"
-                    validate={{
-                      required: { value: true, errorMessage: translate('entity.validation.required') },
-                      number: { value: true, errorMessage: translate('entity.validation.number') }
-                    }}
-                  />
+                    value={(!isNew && registrationEntity.registType) || '0'}
+                  >
+                    <option value="0">
+                      <Translate contentKey="jerkkApp.RegistrationTypeEnum.0" />
+                    </option>
+                    <option value="1">
+                      <Translate contentKey="jerkkApp.RegistrationTypeEnum.1" />
+                    </option>
+                  </AvInput>
                 </AvGroup>
                 <AvGroup>
                   <Label id="dwqcLabel" for="dwqc">
@@ -606,7 +610,7 @@ export class RegistrationUpdate extends React.Component<IRegistrationUpdateProps
                     name="rzjhgkfw"
                     value={(!isNew && registrationEntity.rzjhgkfw) || 'O1'}
                   >
-                    <option value="O1">
+                    <option value="O1">
                       <Translate contentKey="jerkkApp.RzjhgkfwEnum.O1" />
                     </option>
                     <option value="O2">

@@ -57,15 +57,18 @@ public class Jerk extends HighLightEntity {
     @Column(name = "modified_date")
     private Long modifiedDate;
 
-    @OneToOne(fetch = FetchType.EAGER,cascade =  CascadeType.ALL)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(unique = true)
     @Field(type = FieldType.Nested)
     private Registration jerkInfo;
 
-    @OneToOne    @JoinColumn(unique = true)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "preference_id", unique = true)
+    @Field(type = FieldType.Nested)
     private Preference preference;
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
+    // jhipster-needle-entity-add-field - JHipster will add fields here, do not
+    // remove
     public Long getId() {
         return id;
     }
@@ -177,7 +180,8 @@ public class Jerk extends HighLightEntity {
     public void setPreference(Preference preference) {
         this.preference = preference;
     }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and
+    // setters here, do not remove
 
     @Override
     public boolean equals(Object o) {
@@ -201,14 +205,8 @@ public class Jerk extends HighLightEntity {
 
     @Override
     public String toString() {
-        return "Jerk{" +
-            "id=" + getId() +
-            ", username='" + getUsername() + "'" +
-            ", passwd='" + getPasswd() + "'" +
-            ", displayname='" + getDisplayname() + "'" +
-            ", authStatus='" + getAuthStatus() + "'" +
-            ", createdDate=" + getCreatedDate() +
-            ", modifiedDate=" + getModifiedDate() +
-            "}";
+        return "Jerk{" + "id=" + getId() + ", username='" + getUsername() + "'" + ", passwd='" + getPasswd() + "'"
+                + ", displayname='" + getDisplayname() + "'" + ", authStatus='" + getAuthStatus() + "'"
+                + ", createdDate=" + getCreatedDate() + ", modifiedDate=" + getModifiedDate() + "}";
     }
 }

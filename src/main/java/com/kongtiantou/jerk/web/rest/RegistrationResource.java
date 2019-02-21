@@ -43,60 +43,67 @@ public class RegistrationResource {
 
     private final RegistrationSearchRepository registrationSearchRepository;
 
-    public RegistrationResource(RegistrationRepository registrationRepository, RegistrationSearchRepository registrationSearchRepository) {
+    public RegistrationResource(RegistrationRepository registrationRepository,
+            RegistrationSearchRepository registrationSearchRepository) {
         this.registrationRepository = registrationRepository;
         this.registrationSearchRepository = registrationSearchRepository;
     }
 
     /**
-     * POST  /registrations : Create a new registration.
+     * POST /registrations : Create a new registration.
      *
      * @param registration the registration to create
-     * @return the ResponseEntity with status 201 (Created) and with body the new registration, or with status 400 (Bad Request) if the registration has already an ID
+     * @return the ResponseEntity with status 201 (Created) and with body the new
+     *         registration, or with status 400 (Bad Request) if the registration
+     *         has already an ID
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PostMapping("/registrations")
     @Timed
-    public ResponseEntity<Registration> createRegistration(@Valid @RequestBody Registration registration) throws URISyntaxException {
+    public ResponseEntity<Registration> createRegistration(@Valid @RequestBody Registration registration)
+            throws URISyntaxException {
         log.debug("REST request to save Registration : {}", registration);
         if (registration.getId() != null) {
             throw new BadRequestAlertException("A new registration cannot already have an ID", ENTITY_NAME, "idexists");
         }
+        registration.setCreatedDate(System.currentTimeMillis());
         Registration result = registrationRepository.save(registration);
         registrationSearchRepository.save(result);
         return ResponseEntity.created(new URI("/api/registrations/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
-            .body(result);
+                .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString())).body(result);
     }
 
     /**
-     * PUT  /registrations : Updates an existing registration.
+     * PUT /registrations : Updates an existing registration.
      *
      * @param registration the registration to update
-     * @return the ResponseEntity with status 200 (OK) and with body the updated registration,
-     * or with status 400 (Bad Request) if the registration is not valid,
-     * or with status 500 (Internal Server Error) if the registration couldn't be updated
+     * @return the ResponseEntity with status 200 (OK) and with body the updated
+     *         registration, or with status 400 (Bad Request) if the registration is
+     *         not valid, or with status 500 (Internal Server Error) if the
+     *         registration couldn't be updated
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PutMapping("/registrations")
     @Timed
-    public ResponseEntity<Registration> updateRegistration(@Valid @RequestBody Registration registration) throws URISyntaxException {
+    public ResponseEntity<Registration> updateRegistration(@Valid @RequestBody Registration registration)
+            throws URISyntaxException {
         log.debug("REST request to update Registration : {}", registration);
         if (registration.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
+        registration.setModifiedDate(System.currentTimeMillis());
         Registration result = registrationRepository.save(registration);
         registrationSearchRepository.save(result);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, registration.getId().toString()))
-            .body(result);
+                .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, registration.getId().toString())).body(result);
     }
 
     /**
-     * GET  /registrations : get all the registrations.
+     * GET /registrations : get all the registrations.
      *
      * @param pageable the pagination information
-     * @return the ResponseEntity with status 200 (OK) and the list of registrations in body
+     * @return the ResponseEntity with status 200 (OK) and the list of registrations
+     *         in body
      */
     @GetMapping("/registrations")
     @Timed
@@ -108,10 +115,11 @@ public class RegistrationResource {
     }
 
     /**
-     * GET  /registrations/:id : get the "id" registration.
+     * GET /registrations/:id : get the "id" registration.
      *
      * @param id the id of the registration to retrieve
-     * @return the ResponseEntity with status 200 (OK) and with body the registration, or with status 404 (Not Found)
+     * @return the ResponseEntity with status 200 (OK) and with body the
+     *         registration, or with status 404 (Not Found)
      */
     @GetMapping("/registrations/{id}")
     @Timed
@@ -122,7 +130,7 @@ public class RegistrationResource {
     }
 
     /**
-     * DELETE  /registrations/:id : delete the "id" registration.
+     * DELETE /registrations/:id : delete the "id" registration.
      *
      * @param id the id of the registration to delete
      * @return the ResponseEntity with status 200 (OK)
@@ -138,10 +146,10 @@ public class RegistrationResource {
     }
 
     /**
-     * SEARCH  /_search/registrations?query=:query : search for the registration corresponding
-     * to the query.
+     * SEARCH /_search/registrations?query=:query : search for the registration
+     * corresponding to the query.
      *
-     * @param query the query of the registration search
+     * @param query    the query of the registration search
      * @param pageable the pagination information
      * @return the result of the search
      */
@@ -150,7 +158,8 @@ public class RegistrationResource {
     public ResponseEntity<List<Registration>> searchRegistrations(@RequestParam String query, Pageable pageable) {
         log.debug("REST request to search for a page of Registrations for query {}", query);
         Page<Registration> page = registrationSearchRepository.search(queryStringQuery(query), pageable);
-        HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/_search/registrations");
+        HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page,
+                "/api/_search/registrations");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 

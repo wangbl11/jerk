@@ -2,7 +2,7 @@
   "jerkkApp": {
     "preference": {
       "home": {
-        "title": "Preferences",
+        "title": "個人詳細信息",
         "createLabel": "建立一筆新的 Preference",
         "createOrEditLabel": "建立或編輯 Preference",
         "search": "搜尋 Preference"
@@ -14,14 +14,14 @@
         "question": "您確定要刪除 Preference {{ id }} 嗎?"
       },
       "detail": {
-        "title": "Preference"
+        "title": "個人詳細信息"
       },
-      "wechat": "Wechat",
-      "address": "Address",
-      "imageUrl": "Image Url",
-      "lang": "Lang",
-      "createdDate": "Created Date",
-      "modifiedDate": "Modified Date"
+      "wechat": "微信號",
+      "address": "地址",
+      "imageUrl": "照片",
+      "lang": "語言",
+      "createdDate": "創建時間",
+      "modifiedDate": "修改時間"
     }
   }
 }

@@ -49,6 +49,31 @@ export class JerkDetail extends React.Component<IJerkDetailProps> {
               <Translate contentKey={`jerkkApp.AuthStatusEnum.${jerkEntity.authStatus}`} />
             </dd>
             <dt>
+              <Translate contentKey="jerkkApp.preference.wechat">Wechat</Translate>
+            </dt>
+            <dd>{jerkEntity.preference ? jerkEntity.preference.wechat : ''}</dd>
+            <dt>
+              <Translate contentKey="jerkkApp.jerk.jerkInfo">Registration Status</Translate>
+            </dt>
+            <dd>
+              {jerkEntity.jerkInfo ? (
+                jerkEntity.jerkInfo.fbzt === 1 ? (
+                  <Link to={`/entity/registration/${jerkEntity.jerkInfo.id}`} className="btn btn-primary">
+                    <Translate contentKey="jerkkApp.jerk.online">Published</Translate>
+                  </Link>
+                ) : (
+                  <Link to={`/entity/registration/${jerkEntity.jerkInfo.id}`} className="btn btn-primary">
+                    <Translate contentKey="jerkkApp.jerk.offline">Draft</Translate>
+                  </Link>
+                )
+              ) : (
+                <Link to={`/entity/registration/${jerkEntity.id}/new`} className="btn btn-primary">
+                  <Translate contentKey="jerkkApp.jerk.nonregistration">No Registration</Translate>
+                </Link>
+              )}
+            </dd>
+
+            <dt>
               <span id="createdDate">
                 <Translate contentKey="jerkkApp.jerk.createdDate">Created Date</Translate>
               </span>
@@ -64,14 +89,6 @@ export class JerkDetail extends React.Component<IJerkDetailProps> {
             <dd>
               <TextFormat value={jerkEntity.modifiedDate} type="date" format={APP_DATE_FORMAT} blankOnInvalid />
             </dd>
-            <dt>
-              <Translate contentKey="jerkkApp.jerk.jerkInfo">Jerk Info</Translate>
-            </dt>
-            <dd>{jerkEntity.jerkInfo ? jerkEntity.jerkInfo.id : ''}</dd>
-            <dt>
-              <Translate contentKey="jerkkApp.jerk.preference">Preference</Translate>
-            </dt>
-            <dd>{jerkEntity.preference ? jerkEntity.preference.id : ''}</dd>
           </dl>
           <Button tag={Link} to="/entity/jerk" replace color="info">
             <FontAwesomeIcon icon="arrow-left" />{' '}

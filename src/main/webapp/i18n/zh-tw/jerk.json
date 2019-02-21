@@ -2,28 +2,40 @@
   "jerkkApp": {
     "jerk": {
       "home": {
-        "title": "Jerks",
-        "createLabel": "建立一筆新的 Jerk",
-        "createOrEditLabel": "建立或編輯 Jerk",
-        "search": "搜尋 Jerk"
+        "title": "極客",
+        "createLabel": "建立",
+        "editLabel": "編輯極客",
+        "search": "搜尋 極客"
       },
-      "created": "新的 Jerk 建立成功，識別碼為 {{ param }}",
-      "updated": "識別碼為 {{ param }} 的 Jerk 更新成功",
-      "deleted": "識別碼為 {{ param }} 的 Jerk 刪除成功",
+      "created": "新的 極客 建立成功，識別碼為 {{ param }}",
+      "updated": "識別碼為 {{ param }} 的 極客 更新成功",
+      "deleted": "識別碼為 {{ param }} 的 極客 刪除成功",
       "delete": {
-        "question": "您確定要刪除 Jerk {{ id }} 嗎?"
+        "question": "您確定要刪除 極客 {{ id }} 嗎?"
       },
       "detail": {
-        "title": "Jerk"
+        "title": "極客"
       },
-      "username": "Username",
-      "passwd": "Passwd",
-      "displayname": "Displayname",
-      "authStatus": "Auth Status",
-      "createdDate": "Created Date",
-      "modifiedDate": "Modified Date",
-      "jerkInfo": "Jerk Info",
-      "preference": "Preference"
+      "username": "用戶名",
+      "passwd": "口令",
+      "displayname": "顯示名稱",
+      "authStatus": "認證狀態",
+      "createdDate": "創建時間",
+      "modifiedDate": "修改時間",
+      "preference": "首選項",
+      "jerkInfo": "報名",
+      "jerkType": "報名類型",
+      "inbox": "收件箱",
+      "outbox": "發件箱",
+      "favorites": "收藏",
+      "certificate": "認證",
+      "certificated": "已認證",
+      "uncertificate": "收回認證",
+      "uncertificated": "未認證",
+      "registStatus": "報名狀態",
+      "nonregistration": "未報名",
+      "online": "上線",
+      "offline": "下線"
     }
   }
 }

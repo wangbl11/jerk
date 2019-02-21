@@ -4,7 +4,7 @@
       "home": {
         "title": "Jerks",
         "createLabel": "Create a new Jerk",
-        "createOrEditLabel": "Create or edit a Jerk",
+        "editLabel": "Edit Jerk",
         "search": "Search for Jerk"
       },
       "created": "A new Jerk is created with identifier {{ param }}",
@@ -22,7 +22,8 @@
       "authStatus": "Auth Status",
       "createdDate": "Created Date",
       "modifiedDate": "Modified Date",
-      "jerkInfo": "Jerk Info",
+      "jerkInfo": "Registration Info",
+      "jerkType": "Registration Type",
       "preference": "Preference",
       "nonregistration": "No Registration",
       "online": "online",

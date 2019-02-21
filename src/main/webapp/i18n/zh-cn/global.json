@@ -10,8 +10,8 @@
         "jerk": "Jerk",
         "preference": "Preference",
         "registration": "Registration",
-        "tag": "Tag",
-        "setting": "Setting",
+        "tag": "标签",
+        "setting": "设置",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {
@@ -103,7 +103,9 @@
       "edit": "编辑",
       "open": "Open",
       "save": "保存",
-      "view": "查看"
+      "view": "查看",
+      "online": "发布",
+      "offline": "撤回"
     },
     "detail": {
       "field": "字段",

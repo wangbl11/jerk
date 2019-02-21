@@ -1,5 +1,6 @@
 package com.kongtiantou.jerk.domain;
 
+import org.elasticsearch.repositories.RepositoriesService.RegisterRepositoryRequest;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -26,6 +27,8 @@ import com.kongtiantou.jerk.domain.enumeration.RzjhgkfwEnum;
 
 import com.kongtiantou.jerk.domain.enumeration.RzmbEnum;
 
+import com.kongtiantou.jerk.domain.enumeration.RegistrationTypeEnum;
+
 /**
  * A Registration.
  */
@@ -43,7 +46,8 @@ public class Registration implements Serializable {
 
     @NotNull
     @Column(name = "regist_type", nullable = false)
-    private Integer registType;
+    @Enumerated(EnumType.ORDINAL)
+    private RegistrationTypeEnum registType;
 
     @NotNull
     @Size(max = 60)
@@ -219,14 +223,14 @@ public class Registration implements Serializable {
     @Column(name = "modified_date")
     private Long modifiedDate;
 
-
     @Column(name = "fbzt")
     private Integer fbzt;
 
-    @OneToOne(fetch = FetchType.LAZY,mappedBy = "jerkInfo")
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "jerkInfo")
     private Jerk jerk;
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
+    // jhipster-needle-entity-add-field - JHipster will add fields here, do not
+    // remove
     public Long getId() {
         return id;
     }
@@ -235,16 +239,16 @@ public class Registration implements Serializable {
         this.id = id;
     }
 
-    public Integer getRegistType() {
+    public RegistrationTypeEnum getRegistType() {
         return registType;
     }
 
-    public Registration registType(Integer registType) {
+    public Registration registType(RegistrationTypeEnum registType) {
         this.registType = registType;
         return this;
     }
 
-    public void setRegistType(Integer registType) {
+    public void setRegistType(RegistrationTypeEnum registType) {
         this.registType = registType;
     }
 
@@ -729,16 +733,16 @@ public class Registration implements Serializable {
         this.ssly1 = ssly1;
     }
 
-    public Integer getFbzt(){
+    public Integer getFbzt() {
         return fbzt;
     }
 
-    public void setFbzt(Integer fbzt){
-        this.fbzt=fbzt;
+    public void setFbzt(Integer fbzt) {
+        this.fbzt = fbzt;
     }
-    
-    public Registration fbzt(Integer fbzt){
-        this.fbzt=fbzt;
+
+    public Registration fbzt(Integer fbzt) {
+        this.fbzt = fbzt;
         return this;
     }
 
@@ -767,7 +771,8 @@ public class Registration implements Serializable {
     public void setModifiedDate(Long modifiedDate) {
         this.modifiedDate = modifiedDate;
     }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and
+    // setters here, do not remove
 
     @Override
     public boolean equals(Object o) {
@@ -791,48 +796,20 @@ public class Registration implements Serializable {
 
     @Override
     public String toString() {
-        return "Registration{" +
-            "id=" + getId() +
-            ", registType=" + getRegistType() +
-            ", dwqc='" + getDwqc() + "'" +
-            ", hxcpmc='" + getHxcpmc() + "'" +
-            ", zztjdw='" + getZztjdw() + "'" +
-            ", dwhgrdz='" + getDwhgrdz() + "'" +
-            ", szqylx='" + getSzqylx() + "'" +
-            ", ssly='" + getSsly() + "'" +
-            ", gscpjj='" + getGscpjj() + "'" +
-            ", mbkhsc='" + getMbkhsc() + "'" +
-            ", dqzykh='" + getDqzykh() + "'" +
-            ", gnwhjjx='" + getGnwhjjx() + "'" +
-            ", zljs='" + getZljs() + "'" +
-            ", hxjsly='" + getHxjsly() + "'" +
-            ", kjcgzh='" + getKjcgzh() + "'" +
-            ", jmlyqk='" + getJmlyqk() + "'" +
-            ", jscsd='" + getJscsd() + "'" +
-            ", jzmsylqk='" + getJzmsylqk() + "'" +
-            ", jzysjs='" + getJzysjs() + "'" +
-            ", fzrdh='" + getFzrdh() + "'" +
-            ", xb='" + getXb() + "'" +
-            ", lxfs='" + getLxfs() + "'" +
-            ", email='" + getEmail() + "'" +
-            ", fzrnl='" + getFzrnl() + "'" +
-            ", tdpjnl='" + getTdpjnl() + "'" +
-            ", gjrcs=" + getGjrcs() +
-            ", sfgjrzgxjsqy='" + getSfgjrzgxjsqy() + "'" +
-            ", tdysjs='" + getTdysjs() + "'" +
-            ", xycz='" + getXycz() + "'" +
-            ", wlxwhdzclx='" + getWlxwhdzclx() + "'" +
-            ", wlxwhdzclx1='" + getWlxwhdzclx1() + "'" +
-            ", sfxyxc='" + getSfxyxc() + "'" +
-            ", rzjhgkfw='" + getRzjhgkfw() + "'" +
-            ", rzmb='" + getRzmb() + "'" +
-            ", lxrzw='" + getLxrzw() + "'" +
-            ", lxdh='" + getLxdh() + "'" +
-            ", lxyx='" + getLxyx() + "'" +
-            ", lxdz='" + getLxdz() + "'" +
-            ", ssly1='" + getSsly1() + "'" +
-            ", createdDate=" + getCreatedDate() +
-            ", modifiedDate=" + getModifiedDate() +
-            "}";
+        return "Registration{" + "id=" + getId() + ", registType=" + getRegistType() + ", dwqc='" + getDwqc() + "'"
+                + ", hxcpmc='" + getHxcpmc() + "'" + ", zztjdw='" + getZztjdw() + "'" + ", dwhgrdz='" + getDwhgrdz()
+                + "'" + ", szqylx='" + getSzqylx() + "'" + ", ssly='" + getSsly() + "'" + ", gscpjj='" + getGscpjj()
+                + "'" + ", mbkhsc='" + getMbkhsc() + "'" + ", dqzykh='" + getDqzykh() + "'" + ", gnwhjjx='"
+                + getGnwhjjx() + "'" + ", zljs='" + getZljs() + "'" + ", hxjsly='" + getHxjsly() + "'" + ", kjcgzh='"
+                + getKjcgzh() + "'" + ", jmlyqk='" + getJmlyqk() + "'" + ", jscsd='" + getJscsd() + "'" + ", jzmsylqk='"
+                + getJzmsylqk() + "'" + ", jzysjs='" + getJzysjs() + "'" + ", fzrdh='" + getFzrdh() + "'" + ", xb='"
+                + getXb() + "'" + ", lxfs='" + getLxfs() + "'" + ", email='" + getEmail() + "'" + ", fzrnl='"
+                + getFzrnl() + "'" + ", tdpjnl='" + getTdpjnl() + "'" + ", gjrcs=" + getGjrcs() + ", sfgjrzgxjsqy='"
+                + getSfgjrzgxjsqy() + "'" + ", tdysjs='" + getTdysjs() + "'" + ", xycz='" + getXycz() + "'"
+                + ", wlxwhdzclx='" + getWlxwhdzclx() + "'" + ", wlxwhdzclx1='" + getWlxwhdzclx1() + "'" + ", sfxyxc='"
+                + getSfxyxc() + "'" + ", rzjhgkfw='" + getRzjhgkfw() + "'" + ", rzmb='" + getRzmb() + "'" + ", lxrzw='"
+                + getLxrzw() + "'" + ", lxdh='" + getLxdh() + "'" + ", lxyx='" + getLxyx() + "'" + ", lxdz='"
+                + getLxdz() + "'" + ", ssly1='" + getSsly1() + "'" + ", createdDate=" + getCreatedDate()
+                + ", modifiedDate=" + getModifiedDate() + "}";
     }
 }
